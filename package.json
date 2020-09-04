@@ -1,0 +1,32 @@
+{
+  "name": "@forzoom/compact-form",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build/build.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "@forzoom/uploader": "^0.2.1",
+    "rollup": "^2.26.10",
+    "rollup-plugin-alias": "^2.2.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2",
+    "vant": "^2.10.4",
+    "vue": "^2.6.12",
+    "vue-property-decorator": "^9.0.0",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "dependencies": {
+    "rollup-plugin-vue": "~5"
+  }
+}

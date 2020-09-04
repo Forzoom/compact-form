@@ -1,0 +1,6 @@
+{
+    "src": "./src/ts/sections",
+    "dst": "./src/js/sections",
+    "parser": "tsClassVue",
+    "generator": "jsVue"
+}

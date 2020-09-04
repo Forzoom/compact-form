@@ -1,0 +1,9 @@
+.DS_Store
+build
+node_modules
+src
+tests
+.gitignore
+babel.config.js
+shuttle.config.json
+tsconfig.json

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "types": "./types/index.d.ts",
   "scripts": {
     "build": "node build/build.js"
   },

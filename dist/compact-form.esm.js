@@ -1455,6 +1455,11 @@ var script$2 = {
     }()
   },
   created: function created() {
+    this.innerFetchList({
+      id: 0,
+      name: ''
+    });
+
     if (this.value && this.value.length) {
       for (var i = 0, len = this.value.length; i < len; i++) {
         this.innerFetchList({
@@ -1537,7 +1542,7 @@ __vue_render__$2._withStripped = true;
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-4983324a_0", {
+  inject("data-v-6643b006_0", {
     source: ".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,

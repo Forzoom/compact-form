@@ -90,6 +90,7 @@ export default {
     },
 
     created: function() {
+        this.innerFetchList({ id: 0, name: '' });
         if (this.value && this.value.length) {
             for (let i = 0, len = this.value.length; i < len; i++) {
                 this.innerFetchList({ id: this.value[i], name: '' });

@@ -30,7 +30,7 @@ export default class CompactInput extends Vue {
     /** 类别 */
     @Prop({ type: String, default: 'text' }) public type!: any;
     /** 是否通过验证 */
-    @Prop({ type: Boolean, default: true }) public isValiate?: boolean;
+    @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
     /** class */
     @Prop() public clazz?: any;
 

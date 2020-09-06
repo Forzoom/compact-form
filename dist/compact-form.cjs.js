@@ -56,17 +56,9 @@ require('core-js/modules/web.dom-collections.iterator');
 
 require('core-js/modules/es.number.constructor');
 
-require('core-js/modules/es.array.concat');
-
-require('core-js/modules/es.array.is-array');
-
-require('core-js/modules/es.regexp.exec');
-
-require('core-js/modules/es.string.replace');
-
-require('vue');
-
 require('core-js/modules/es.array.filter');
+
+require('core-js/modules/es.array.concat');
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -1636,7 +1628,7 @@ var script$3 = {
     },
 
     /** 是否通过验证 */
-    isValiate: {
+    isValidate: {
       type: Boolean,
       "default": true
     },
@@ -2371,15 +2363,15 @@ __vue_render__$6._withStripped = true;
 
 var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-575ec0ac_0", {
-    source: ".compact-uploader {\n  padding: 20px 0 0px;\n  text-align: center;\n}\n.compact-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.compact-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.compact-uploader .is-error {\n  color: #fc4548;\n}\n.compact-uploader__title {\n  padding-top: 25px;\n  font-size: 14px;\n  line-height: 17px;\n  font-weight: bold;\n}\n.compact-uploader__title-hint {\n  padding-top: 4px;\n  font-size: 14px;\n  line-height: 17px;\n  color: #888888;\n}\n",
+  inject("data-v-53409789_0", {
+    source: ".compact-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.compact-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.compact-uploader .is-error {\n  color: #fc4548;\n}\n.compact-uploader__title {\n  padding-top: 25px;\n}\n.compact-uploader__title-hint {\n  padding-top: 4px;\n  font-size: 14px;\n  line-height: 17px;\n  color: #888888;\n}\n",
     map: {
       "version": 3,
       "sources": ["uploader.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,WAAW;EACX,YAAY;AACd;AACA;EACE,sBAAsB;EACtB,2BAA2B;AAC7B;AACA;EACE,cAAc;AAChB;AACA;EACE,iBAAiB;EACjB,eAAe;EACf,iBAAiB;EACjB,iBAAiB;AACnB;AACA;EACE,gBAAgB;EAChB,eAAe;EACf,iBAAiB;EACjB,cAAc;AAChB",
+      "mappings": "AAAA;EACE,WAAW;EACX,YAAY;AACd;AACA;EACE,sBAAsB;EACtB,2BAA2B;AAC7B;AACA;EACE,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,gBAAgB;EAChB,eAAe;EACf,iBAAiB;EACjB,cAAc;AAChB",
       "file": "uploader.vue",
-      "sourcesContent": [".compact-uploader {\n  padding: 20px 0 0px;\n  text-align: center;\n}\n.compact-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.compact-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.compact-uploader .is-error {\n  color: #fc4548;\n}\n.compact-uploader__title {\n  padding-top: 25px;\n  font-size: 14px;\n  line-height: 17px;\n  font-weight: bold;\n}\n.compact-uploader__title-hint {\n  padding-top: 4px;\n  font-size: 14px;\n  line-height: 17px;\n  color: #888888;\n}\n"]
+      "sourcesContent": [".compact-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.compact-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.compact-uploader .is-error {\n  color: #fc4548;\n}\n.compact-uploader__title {\n  padding-top: 25px;\n}\n.compact-uploader__title-hint {\n  padding-top: 4px;\n  font-size: 14px;\n  line-height: 17px;\n  color: #888888;\n}\n"]
     },
     media: undefined
   });

@@ -140,8 +140,6 @@ export default {
 @import "../../lib/style/mixins.less";
 
 .compact-uploader {
-    padding: 20px 0 0px;
-    text-align: center;
     .ro-uploader-wrap {
         width: 72px;
         height: 72px;
@@ -158,9 +156,6 @@ export default {
     }
     &__title {
         padding-top: 25px;
-        font-size: 14px;
-        line-height: 17px;
-        font-weight: bold;
     }
     &__title-hint {
         padding-top: 4px;

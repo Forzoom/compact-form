@@ -10,7 +10,6 @@
 
 </template>
 <script lang="js">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ListItem from './listItem.vue';
 
 export default {
@@ -37,7 +36,7 @@ export default {
         type: { type: String, default: 'text' },
 
         /** 是否通过验证 */
-        isValiate: { type: Boolean, default: true },
+        isValidate: { type: Boolean, default: true },
 
         /** class */
         clazz: {},

@@ -62,7 +62,7 @@ export interface CompactSelectMeta extends CompactFormBasicSectionMeta {
 // uploader
 export interface CompactUploaderMeta extends CompactFormBasicSectionMeta {
     type: 'CompactUploader';
-    titleComponent: true;
+    titleComponent: false;
     props?: {
         /** 标题 */
         title?: string;

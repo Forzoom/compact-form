@@ -11,6 +11,8 @@
                 <slot name="content"></slot>
             </div>
         </slot>
+        <slot name="extra">
+        </slot>
     </div>
 </template>
 

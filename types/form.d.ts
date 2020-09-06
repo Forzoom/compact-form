@@ -15,6 +15,20 @@ export interface CompactFormBasicSectionMeta {
     validates?: ValidateRule[];
 }
 
+// cascader
+export interface CompactCascaderMeta extends FormBasicSectionMeta {
+    type: 'CompactCascader';
+    titleComponent: true;
+    props: {
+        title?: string;
+        titleHint?: string;
+        placeholder?: string;
+        /** 获取列表数据 */
+        fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
+    };
+}
+
+// input
 export interface CompactInputMeta extends CompactFormBasicSectionMeta {
     type: 'CompactInput';
     titleComponent: true;
@@ -24,4 +38,14 @@ export interface CompactInputMeta extends CompactFormBasicSectionMeta {
         type?: 'text' | 'tel';
         clazz?: string[];
     };
+}
+
+export interface ValueText {
+    value: any;
+    text: string;
+}
+
+export interface CascaderItem {
+    id: number;
+    name: string;
 }

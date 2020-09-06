@@ -43,3 +43,31 @@ export type CompactSelectComponent = CombinedVueInstance<Vue, object, object, ob
 export type CompactSelectComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<CompactSelectProp>, CompactSelectProp>;
 
 export const CompactSelect: CompactSelectComponentOptions;
+
+// select
+interface CompactSelectProp {
+    title?: string;
+    /** 是否显示星号 */
+    required?: boolean;
+    placeholder?: string;
+    /** 选项 */
+    options?: ValueText[];
+    clazz?: string[];
+}
+export type CompactSelectComponent = CombinedVueInstance<Vue, object, object, object, CompactSelectProp>;
+export type CompactSelectComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<CompactSelectProp>, CompactSelectProp>;
+
+export const CompactSelect: CompactSelectComponentOptions;
+
+// uploader
+interface CompactUploaderProp {
+    title?: string;
+    titleHint?: string;
+    /** 是否显示星号 */
+    required?: boolean;
+    httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
+}
+export type CompactUploaderComponent = CombinedVueInstance<Vue, object, object, object, CompactUploaderProp>;
+export type CompactUploaderComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<CompactUploaderProp>, CompactUploaderProp>;
+
+export const CompactUploader: CompactUploaderComponentOptions;

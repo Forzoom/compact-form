@@ -1,7 +1,7 @@
 <template>
 
     <ListItem class="compact-input" :class="clazz">
-        <label slot="left">{{title}}<span v-if="required" class="list-required">*</span></label>
+        <label slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
             <input v-if="type == 'text'" v-model="v" class="list-input right block" type="text" :placeholder="placeholder" @blur="onBlur" />
             <input v-if="type == 'tel'" v-model="v" class="list-input right block" type="tel" :placeholder="placeholder" @blur="onBlur" />
@@ -10,6 +10,7 @@
 
 </template>
 <script lang="js">
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import ListItem from './listItem.vue';
 
 export default {
@@ -34,6 +35,9 @@ export default {
 
         /** 类别 */
         type: { type: String, default: 'text' },
+
+        /** 是否通过验证 */
+        isValiate: { type: Boolean, default: true },
 
         /** class */
         clazz: {},

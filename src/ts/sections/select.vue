@@ -1,6 +1,6 @@
 <template>
-    <ListItem :class="clazz">
-        <label slot="left" for="halal-food">{{title}}<span v-if="required" class="list-required">*</span></label>
+    <ListItem class="compact-select" :class="clazz">
+        <label slot="left" :class="{'is-error': !isValiate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
             <select v-model="v" class="list-input right block" type="text" :class="{placeholder: v === ''}" >
                 <option value="">{{placeholder}}</option>
@@ -32,6 +32,8 @@ export default class CompactSelect extends Vue {
     @Prop({ type: Array, default() { return []; }}) public options!: ValueText[];
     /** 占位 */
     @Prop({ type: String, default: '点击选择'}) public placeholder!: any;
+    /** 是否通过验证 */
+    @Prop({ type: Boolean, default: true }) public isValiate?: boolean;
     /** class */
     @Prop() public clazz?: any;
 
@@ -53,3 +55,13 @@ export default class CompactSelect extends Vue {
     }
 }
 </script>
+
+<style lang="less">
+@import "../../lib/style/mixins.less";
+
+.compact-select {
+    .is-error {
+        color: @color-red;
+    }
+}
+</style>

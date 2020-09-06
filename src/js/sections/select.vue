@@ -1,7 +1,7 @@
 <template>
 
-    <ListItem :class="clazz">
-        <label slot="left" for="halal-food">{{title}}<span v-if="required" class="list-required">*</span></label>
+    <ListItem class="compact-select" :class="clazz">
+        <label slot="left" :class="{'is-error': !isValiate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
             <select v-model="v" class="list-input right block" type="text" :class="{placeholder: v === ''}" >
                 <option value="">{{placeholder}}</option>
@@ -37,6 +37,9 @@ export default {
         /** 占位 */
         placeholder: { type: String, default: '点击选择'},
 
+        /** 是否通过验证 */
+        isValiate: { type: Boolean, default: true },
+
         /** class */
         clazz: {},
     },
@@ -47,6 +50,8 @@ export default {
             v: null,
         };
     },
+
+    computed: {},
 
     watch: {
         // 外部更新
@@ -60,8 +65,21 @@ export default {
         },
     },
 
+    methods: {},
+
     created: function() {
         this.v = this.value;
     },
 };
 </script>
+<style lang="less">
+
+@import "../../lib/style/mixins.less";
+
+.compact-select {
+    .is-error {
+        color: @color-red;
+    }
+}
+
+</style>

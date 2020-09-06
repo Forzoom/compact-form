@@ -59,9 +59,34 @@ export interface CompactSelectMeta extends CompactFormBasicSectionMeta {
     };
 }
 
+// uploader
+export interface CompactUploaderMeta extends CompactFormBasicSectionMeta {
+    type: 'CompactUploader';
+    titleComponent: true;
+    props?: {
+        /** 标题 */
+        title?: string;
+        /** 副标题 */
+        titleHint?: string;
+        /** 是否显示星号 */
+        required?: boolean;
+        /** 用于发送上传请求 */
+        httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
+    };
+}
+
+export type CompactFormSectionMeta = CompactCascaderMeta | CompactInputMeta | CompactSelectMeta | CompactUploaderMeta;
+
 export interface ValueText {
     value: any;
     text: string;
+}
+
+export interface ImageInfo {
+    key: string;
+    url: string;
+    /** file: 上传后的文件链接 wechat: 微信临时文件 */
+    mode: 'file' | 'wechat';
 }
 
 export interface CascaderItem {

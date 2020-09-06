@@ -1,6 +1,6 @@
 {
-    "src": "./src/ts/sections",
-    "dst": "./src/js/sections",
+    "src": "./src/ts/sections/cascader.vue",
+    "dst": "./src/js/sections/cascader.vue",
     "parser": "tsClassVue",
     "generator": "jsVue"
 }

@@ -16,7 +16,7 @@ export interface CompactFormBasicSectionMeta {
 }
 
 // cascader
-export interface CompactCascaderMeta extends FormBasicSectionMeta {
+export interface CompactCascaderMeta extends CompactFormBasicSectionMeta {
     type: 'CompactCascader';
     titleComponent: true;
     props: {

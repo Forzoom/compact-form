@@ -1,6 +1,6 @@
 <template>
 
-    <ListItem class="compact-cascader">
+    <ListItem class="compact-cascader" :class="clazz">
         <label slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content right" :class="{placeholder: name.length === 0}" @click="onClickPlaceholder">
             {{name || placeholder}}
@@ -39,6 +39,9 @@ export default {
 
         /** 数据是否有效 */
         isValidate: { type: Boolean, default: true },
+
+        /** class */
+        clazz: {},
     },
 
     data: function data() {

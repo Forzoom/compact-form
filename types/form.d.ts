@@ -25,6 +25,8 @@ export interface CompactCascaderMeta extends CompactFormBasicSectionMeta {
         placeholder?: string;
         /** 获取列表数据 */
         fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
+        /** class */
+        clazz?: string[];
     };
 }
 
@@ -72,6 +74,8 @@ export interface CompactUploaderMeta extends CompactFormBasicSectionMeta {
         required?: boolean;
         /** 用于发送上传请求 */
         httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
+        /** class */
+        clazz?: string[];
     };
 }
 

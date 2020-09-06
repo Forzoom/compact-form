@@ -1,5 +1,5 @@
 <template>
-    <ListItem class="compact-cascader">
+    <ListItem class="compact-cascader" :class="clazz">
         <label slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content right" :class="{placeholder: name.length === 0}" @click="onClickPlaceholder">
             {{name || placeholder}}
@@ -36,6 +36,8 @@ export default class CompactCascader extends Vue {
     @Prop({ required: true, type: Function }) public fetchList!: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
     /** 数据是否有效 */
     @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
+    /** class */
+    @Prop() public clazz?: any;
 
     public visible = false;
     public ids: number[] = [];

@@ -1380,7 +1380,10 @@ var script$2 = {
     isValidate: {
       type: Boolean,
       "default": true
-    }
+    },
+
+    /** class */
+    clazz: {}
   },
   data: function data() {
     return {
@@ -1473,7 +1476,8 @@ var __vue_render__$2 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("ListItem", {
-    staticClass: "compact-cascader"
+    staticClass: "compact-cascader",
+    "class": _vm.clazz
   }, [_c("label", {
     "class": {
       "is-error": !_vm.isValidate
@@ -1533,7 +1537,7 @@ __vue_render__$2._withStripped = true;
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-393df6a6_0", {
+  inject("data-v-4983324a_0", {
     source: ".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,

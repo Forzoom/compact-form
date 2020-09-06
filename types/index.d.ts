@@ -9,6 +9,8 @@ interface CompactCascaderProp {
     required?: boolean;
     placeholder?: string;
     fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
+    /** class */
+    clazz?: string[];
 }
 export type CompactCascaderComponent = CombinedVueInstance<Vue, object, object, object, CompactCascaderProp>;
 export type CompactCascaderComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<CompactCascaderProp>, CompactCascaderProp>;
@@ -22,6 +24,7 @@ interface CompactInputProp {
     required?: boolean;
     placeholder?: string;
     type?: 'tel' | 'text';
+    /** class */
     clazz?: string[];
 }
 export type CompactInputComponent = CombinedVueInstance<Vue, object, object, object, CompactInputProp>;
@@ -37,6 +40,7 @@ interface CompactSelectProp {
     placeholder?: string;
     /** 选项 */
     options?: ValueText[];
+    /** class */
     clazz?: string[];
 }
 export type CompactSelectComponent = CombinedVueInstance<Vue, object, object, object, CompactSelectProp>;
@@ -51,6 +55,8 @@ interface CompactUploaderProp {
     /** 是否显示星号 */
     required?: boolean;
     httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
+    /** class */
+    clazz?: string[];
 }
 export type CompactUploaderComponent = CombinedVueInstance<Vue, object, object, object, CompactUploaderProp>;
 export type CompactUploaderComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<CompactUploaderProp>, CompactUploaderProp>;

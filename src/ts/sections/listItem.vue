@@ -11,8 +11,7 @@
                 <slot name="content"></slot>
             </div>
         </slot>
-        <slot name="extra">
-        </slot>
+        <slot name="extra"></slot>
     </div>
 </template>
 
@@ -31,6 +30,8 @@ export default class ListItem extends Vue {
 </script>
 
 <style lang="less">
+@import "../../lib/style/mixins.less";
+
 @list-font-size: 16px;
 @list-line-height: 25px;
 @list-padding-v: 12px;
@@ -91,7 +92,7 @@ export default class ListItem extends Vue {
             height: 44px;
         }
         &::-webkit-input-placeholder {
-            color: #999;
+            color: @color-placeholder;
         }
     }
     select.list-input.right {

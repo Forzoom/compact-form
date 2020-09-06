@@ -1,5 +1,5 @@
 <template>
-    <ListItem :class="clazz">
+    <ListItem class="compact-input" :class="clazz">
         <label slot="left">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
             <input v-if="type == 'text'" v-model="v" class="list-input right block" type="text" :placeholder="placeholder" @blur="onBlur" />

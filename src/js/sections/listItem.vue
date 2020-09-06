@@ -12,6 +12,7 @@
                 <slot name="content"></slot>
             </div>
         </slot>
+        <slot name="extra"></slot>
     </div>
 
 </template>
@@ -37,6 +38,8 @@ export default {
 };
 </script>
 <style lang="less">
+
+@import "../../lib/style/mixins.less";
 
 @list-font-size: 16px;
 @list-line-height: 25px;
@@ -98,7 +101,7 @@ export default {
             height: 44px;
         }
         &::-webkit-input-placeholder {
-            color: #999;
+            color: @color-placeholder;
         }
     }
     select.list-input.right {

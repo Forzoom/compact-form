@@ -1,5 +1,5 @@
 <template>
-    <ListItem class="item-cascader">
+    <ListItem class="compact-cascader">
         <label slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content right" :class="{placeholder: name.length === 0}" @click="onClickPlaceholder">
             {{name || placeholder}}
@@ -16,19 +16,21 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import Cascader from '../components/cascader.vue';
+import ListItem from './listItem.vue';
 import { CascaderItem } from 'types/form';
 
 @Component({
     name: 'CompactCascader',
     components: {
         Cascader,
+        ListItem,
     },
 })
 export default class CompactCascader extends Vue {
     /** title */
     @Prop({ type: String }) public title?: string;
     /** titleHint */
-    @Prop({ type: String }) public titleHint?: string;
+    @Prop({ type: Boolean }) public required?: boolean;
     @Prop({ type: Array, default() { return []; } }) public value?: number[];
     @Prop({ type: String, default: '请选择' }) public placeholder?: string;
     @Prop({ required: true, type: Function }) public fetchList!: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
@@ -84,17 +86,12 @@ export default class CompactCascader extends Vue {
 <style lang="less">
 @import "../../lib/style/mixins.less";
 
-.item-cascader {
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 14px;
-    line-height: 25px;
+.compact-cascader {
     .is-error {
-        box-shadow: 0 0 1px 1px @color-red;
+        color: @color-red;
     }
     .placeholder {
-        color: #c8c8c8;
+        color: @color-placeholder;
     }
 }
 </style>

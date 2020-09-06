@@ -1,6 +1,6 @@
 <template>
 
-    <ListItem class="item-cascader">
+    <ListItem class="compact-cascader">
         <label slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content right" :class="{placeholder: name.length === 0}" @click="onClickPlaceholder">
             {{name || placeholder}}
@@ -16,12 +16,14 @@
 </template>
 <script lang="js">
 import Cascader from '../components/cascader.vue';
+import ListItem from './listItem.vue';
 
 export default {
     name: 'CompactCascader',
 
     components: {
         Cascader,
+        ListItem,
     },
 
     props: {
@@ -29,7 +31,7 @@ export default {
         title: { type: String },
 
         /** titleHint */
-        titleHint: { type: String },
+        required: { type: Boolean },
 
         value: { type: Array, default() { return []; } },
         placeholder: { type: String, default: '请选择' },
@@ -97,17 +99,12 @@ export default {
 
 @import "../../lib/style/mixins.less";
 
-.item-cascader {
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 14px;
-    line-height: 25px;
+.compact-cascader {
     .is-error {
-        box-shadow: 0 0 1px 1px @color-red;
+        color: @color-red;
     }
     .placeholder {
-        color: #c8c8c8;
+        color: @color-placeholder;
     }
 }
 

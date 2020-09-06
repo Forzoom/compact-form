@@ -1292,11 +1292,93 @@ var __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
 }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, createInjector, undefined, undefined);
+/**
+ * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效
+ */
+
 
 var script$1 = {
+  name: 'ListItem',
+  props: {
+    padding: {
+      type: String,
+      "default": 'normal'
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  computed: {},
+  watch: {},
+  methods: {}
+};
+/* script */
+
+var __vue_script__$1 = script$1;
+/* template */
+
+var __vue_render__$1 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("div", {
+    staticClass: "list-item",
+    "class": ["padding-" + _vm.padding]
+  }, [_vm._t("default", [_c("div", {
+    staticClass: "clearfix"
+  }, [_c("div", {
+    staticClass: "list-item-left"
+  }, [_vm._t("left")], 2), _vm._v(" "), _c("div", {
+    staticClass: "list-item-right"
+  }, [_vm._t("right")], 2), _vm._v(" "), _vm._t("content")], 2)]), _vm._v(" "), _vm._t("extra")], 2);
+};
+
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-3dc515a4_0", {
+    source: ".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 25px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["listItem.vue", "/Volumes/Repo2/repo/rebirth-project/compact-form/src/js/sections/listItem.vue"],
+      "names": [],
+      "mappings": "AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;AACb;AACA;EACE,eAAe;EACf,iBAAiB;EACjB,6BAA6B;EAC7B,SAAS;EACT,gBAAgB;EAChB,wBAAwB;EACxB,sBAAsB;AACxB;AACA;EACE,WAAW;AACb;AACA;ECCA,iBAAA;EDCE,sBAAsB;ECCxB,yBAAA;AACA;AACA;EACA,YAAA;ADCA;ACCA;EACA,cAAA;AACA;AACA;EACA,cAAA;AACA;AACA;EACA,iBAAA;EACA,sBAAA;EDCE,yBAAyB;ACC3B;AACA;EACA,WAAA;EACA,eAAA;EACA,iBAAA;EACA,SAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,iBAAA;AACA;AACA;EACA,cAAA;AACA;ADCA;ECCA,kBAAA;EACA,MAAA;EACA,QAAA;EACA,SAAA;EACA,OAAA;EDCE,WAAW;ECCb,UAAA;AACA",
+      "file": "listItem.vue",
+      "sourcesContent": [".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 25px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n", "<template>\n\n    <div class=\"list-item\" :class=\"['padding-' + padding]\">\n        <slot>\n            <div class=\"clearfix\">\n                <div class=\"list-item-left\">\n                    <slot name=\"left\"></slot>\n                </div>\n                <div class=\"list-item-right\">\n                    <slot name=\"right\"></slot>\n                </div>\n                <slot name=\"content\"></slot>\n            </div>\n        </slot>\n        <slot name=\"extra\"></slot>\n    </div>\n\n</template>\n<script lang=\"js\">\n\n/**\n * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效\n */\nexport default {\n    name: 'ListItem',\n\n    props: {\n        padding: { type: String, default: 'normal' },\n    },\n\n    data: function data() {\n        return {};\n    },\n\n    computed: {},\n    watch: {},\n    methods: {},\n};\n</script>\n<style lang=\"less\">\n\n@import \"../../lib/style/mixins.less\";\n\n@list-font-size: 16px;\n@list-line-height: 25px;\n@list-padding-v: 12px;\n@list-padding-h: 15px;\n\n.list-item {\n    position: relative;\n    padding: @list-padding-v @list-padding-h;\n    font-size: @list-font-size;\n    line-height: @list-line-height;\n    color: #000;\n    &.padding-small {\n        padding: 7px 10px;\n    }\n\n    .list-item-left {\n        float: left;\n        max-width: 60%;\n    }\n    .list-item-right {\n        float: right;\n    }\n    .list-item-content {\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n    }\n    .list-item-content.right {\n        text-align: right;\n    }\n\n    .list-item.placeholder {\n        .list-item-right {\n            color: #999;\n        }\n    }\n\n    // 应用在input上\n    .list-input {\n        font-size: 16px;\n        line-height: 22px;\n        background-color: transparent;\n        border: 0;\n        // 删除原本样式\n        appearance: none;\n        -webkit-appearance: none;\n        box-sizing: border-box;\n        &.block {\n            width: 100%;\n        }\n        // 内容局右\n        &.right {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n        &.two {\n            height: 44px;\n        }\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    select.list-input.right {\n        direction: rtl;\n        option {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n    }\n\n    // textarea的样式\n    .list-item-textarea {\n        width: 100%;\n        font-size: 16px;\n        line-height: 22px;\n        border: 0;\n        vertical-align: middle;\n        resize: none;\n    }\n    .list-item-textarea-length {\n        text-align: right;\n    }\n    .list-required {\n        color: #fc4548;\n    }\n    // select的样式\n    .list-item-placeholder-select {\n        position: absolute;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        opacity: 0;\n    }\n}\n\n</style>\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$1 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$1 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$1 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
+
+var script$2 = {
   name: 'CompactCascader',
   components: {
-    Cascader: __vue_component__
+    Cascader: __vue_component__,
+    ListItem: __vue_component__$1
   },
   props: {
     /** title */
@@ -1305,8 +1387,8 @@ var script$1 = {
     },
 
     /** titleHint */
-    titleHint: {
-      type: String
+    required: {
+      type: Boolean
     },
     value: {
       type: Array,
@@ -1409,10 +1491,10 @@ var script$1 = {
     }
   }
 };
-var __vue_script__$1 = script$1;
+var __vue_script__$2 = script$2;
 /* template */
 
-var __vue_render__$1 = function __vue_render__() {
+var __vue_render__$2 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -1420,7 +1502,7 @@ var __vue_render__$1 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("ListItem", {
-    staticClass: "item-cascader"
+    staticClass: "compact-cascader"
   }, [_c("label", {
     "class": {
       "is-error": !_vm.isValidate
@@ -1474,102 +1556,21 @@ var __vue_render__$1 = function __vue_render__() {
   })], 1)], 1);
 };
 
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
-/* style */
-
-var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
-  if (!inject) return;
-  inject("data-v-99d2ac28_0", {
-    source: ".item-cascader {\n  background-color: #f2f2f2;\n  border-radius: 5px;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n}\n.item-cascader .is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-cascader .placeholder {\n  color: #c8c8c8;\n}\n",
-    map: {
-      "version": 3,
-      "sources": ["cascader.vue"],
-      "names": [],
-      "mappings": "AAAA;EACE,yBAAyB;EACzB,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iBAAiB;AACnB;AACA;EACE,+BAA+B;AACjC;AACA;EACE,cAAc;AAChB",
-      "file": "cascader.vue",
-      "sourcesContent": [".item-cascader {\n  background-color: #f2f2f2;\n  border-radius: 5px;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n}\n.item-cascader .is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-cascader .placeholder {\n  color: #c8c8c8;\n}\n"]
-    },
-    media: undefined
-  });
-};
-/* scoped */
-
-
-var __vue_scope_id__$1 = undefined;
-/* module identifier */
-
-var __vue_module_identifier__$1 = undefined;
-/* functional template */
-
-var __vue_is_functional_template__$1 = false;
-/* style inject SSR */
-
-/* style inject shadow dom */
-
-var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$1,
-  staticRenderFns: __vue_staticRenderFns__$1
-}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
-/**
- * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效
- */
-
-
-var script$2 = {
-  name: 'ListItem',
-  props: {
-    padding: {
-      type: String,
-      "default": 'normal'
-    }
-  },
-  data: function data() {
-    return {};
-  },
-  computed: {},
-  watch: {},
-  methods: {}
-};
-/* script */
-
-var __vue_script__$2 = script$2;
-/* template */
-
-var __vue_render__$2 = function __vue_render__() {
-  var _vm = this;
-
-  var _h = _vm.$createElement;
-
-  var _c = _vm._self._c || _h;
-
-  return _c("div", {
-    staticClass: "list-item",
-    "class": ["padding-" + _vm.padding]
-  }, [_vm._t("default", [_c("div", {
-    staticClass: "clearfix"
-  }, [_c("div", {
-    staticClass: "list-item-left"
-  }, [_vm._t("left")], 2), _vm._v(" "), _c("div", {
-    staticClass: "list-item-right"
-  }, [_vm._t("right")], 2), _vm._v(" "), _vm._t("content")], 2)])], 2);
-};
-
 var __vue_staticRenderFns__$2 = [];
 __vue_render__$2._withStripped = true;
 /* style */
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-b53ef88e_0", {
-    source: ".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 25px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #999;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n",
+  inject("data-v-393df6a6_0", {
+    source: ".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,
-      "sources": ["listItem.vue", "/Volumes/Repo2/repo/rebirth-project/compact-form/src/js/sections/listItem.vue"],
+      "sources": ["cascader.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;AACb;AACA;EACE,eAAe;EACf,iBAAiB;EACjB,6BAA6B;EAC7B,SAAS;EACT,gBAAgB;EAChB,wBAAwB;EACxB,sBAAsB;AACxB;AACA;EACE,WAAW;AACb;ACCA;EACA,iBAAA;EACA,sBAAA;EACA,yBAAA;ADCA;ACCA;EACA,YAAA;AACA;AACA;EACA,WAAA;AACA;AACA;EACA,cAAA;AACA;ADCA;ECCA,iBAAA;EACA,sBAAA;EACA,yBAAA;AACA;AACA;EACA,WAAA;EACA,eAAA;EACA,iBAAA;EACA,SAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,iBAAA;AACA;ADCA;ECCA,cAAA;AACA;AACA;EACA,kBAAA;EACA,MAAA;EDCE,QAAQ;ECCV,SAAA;EACA,OAAA;EACA,WAAA;EACA,UAAA;AACA",
-      "file": "listItem.vue",
-      "sourcesContent": [".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 25px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #999;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n", "<template>\n\n    <div class=\"list-item\" :class=\"['padding-' + padding]\">\n        <slot>\n            <div class=\"clearfix\">\n                <div class=\"list-item-left\">\n                    <slot name=\"left\"></slot>\n                </div>\n                <div class=\"list-item-right\">\n                    <slot name=\"right\"></slot>\n                </div>\n                <slot name=\"content\"></slot>\n            </div>\n        </slot>\n    </div>\n\n</template>\n<script lang=\"js\">\n\n/**\n * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效\n */\nexport default {\n    name: 'ListItem',\n\n    props: {\n        padding: { type: String, default: 'normal' },\n    },\n\n    data: function data() {\n        return {};\n    },\n\n    computed: {},\n    watch: {},\n    methods: {},\n};\n</script>\n<style lang=\"less\">\n\n@list-font-size: 16px;\n@list-line-height: 25px;\n@list-padding-v: 12px;\n@list-padding-h: 15px;\n\n.list-item {\n    position: relative;\n    padding: @list-padding-v @list-padding-h;\n    font-size: @list-font-size;\n    line-height: @list-line-height;\n    color: #000;\n    &.padding-small {\n        padding: 7px 10px;\n    }\n\n    .list-item-left {\n        float: left;\n        max-width: 60%;\n    }\n    .list-item-right {\n        float: right;\n    }\n    .list-item-content {\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n    }\n    .list-item-content.right {\n        text-align: right;\n    }\n\n    .list-item.placeholder {\n        .list-item-right {\n            color: #999;\n        }\n    }\n\n    // 应用在input上\n    .list-input {\n        font-size: 16px;\n        line-height: 22px;\n        background-color: transparent;\n        border: 0;\n        // 删除原本样式\n        appearance: none;\n        -webkit-appearance: none;\n        box-sizing: border-box;\n        &.block {\n            width: 100%;\n        }\n        // 内容局右\n        &.right {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n        &.two {\n            height: 44px;\n        }\n        &::-webkit-input-placeholder {\n            color: #999;\n        }\n    }\n    select.list-input.right {\n        direction: rtl;\n        option {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n    }\n\n    // textarea的样式\n    .list-item-textarea {\n        width: 100%;\n        font-size: 16px;\n        line-height: 22px;\n        border: 0;\n        vertical-align: middle;\n        resize: none;\n    }\n    .list-item-textarea-length {\n        text-align: right;\n    }\n    .list-required {\n        color: #fc4548;\n    }\n    // select的样式\n    .list-item-placeholder-select {\n        position: absolute;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        opacity: 0;\n    }\n}\n\n</style>\n"]
+      "mappings": "AAAA;EACE,cAAc;AAChB;AACA;EACE,cAAc;AAChB",
+      "file": "cascader.vue",
+      "sourcesContent": [".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n"]
     },
     media: undefined
   });
@@ -1596,7 +1597,7 @@ var __vue_component__$2 = /*#__PURE__*/normalizeComponent({
 var script$3 = {
   name: 'CompactInput',
   components: {
-    ListItem: __vue_component__$2
+    ListItem: __vue_component__$1
   },
   props: {
     /** 标题 */
@@ -1662,6 +1663,7 @@ var __vue_render__$3 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("ListItem", {
+    staticClass: "compact-input",
     "class": _vm.clazz
   }, [_c("label", {
     attrs: {
@@ -1754,6 +1756,7 @@ var __vue_component__$3 = /*#__PURE__*/normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$3
 }, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
 
-exports.CompactCascader = __vue_component__$1;
+exports.CompactCascader = __vue_component__$2;
 exports.CompactInput = __vue_component__$3;
-exports.ListItem = __vue_component__$2;
+exports.CompactSelect = __vue_component__$3;
+exports.ListItem = __vue_component__$1;

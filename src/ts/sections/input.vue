@@ -30,7 +30,7 @@ export default class CompactInput extends Vue {
     /** 类别 */
     @Prop({ type: String, default: 'text' }) public type!: any;
     /** class */
-    @Prop() public clazz!: any;
+    @Prop() public clazz?: any;
 
     // 值
     public v: any = null;

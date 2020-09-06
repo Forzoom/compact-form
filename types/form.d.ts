@@ -34,8 +34,27 @@ export interface CompactInputMeta extends CompactFormBasicSectionMeta {
     titleComponent: true;
     props?: {
         title?: string;
+        /** 是否显示星号 */
+        required?: boolean;
         placeholder?: string;
         type?: 'text' | 'tel';
+        /** class */
+        clazz?: string[];
+    };
+}
+
+// select
+export interface CompactSelectMeta extends CompactFormBasicSectionMeta {
+    type: 'CompactSelect';
+    titleComponent: true;
+    props?: {
+        title?: string;
+        /** 是否显示星号 */
+        required?: boolean;
+        placeholder?: string;
+        /** 选项 */
+        options?: ValueText[];
+        /** class */
         clazz?: string[];
     };
 }

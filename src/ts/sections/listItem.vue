@@ -33,7 +33,7 @@ export default class ListItem extends Vue {
 @import "../../lib/style/mixins.less";
 
 @list-font-size: 16px;
-@list-line-height: 25px;
+@list-line-height: 24px;
 @list-padding-v: 12px;
 @list-padding-h: 15px;
 
@@ -62,6 +62,12 @@ export default class ListItem extends Vue {
     .list-item-content.right {
         text-align: right;
     }
+    .list-item-content.center {
+        text-align: center;
+    }
+    .list-item-content.left {
+        text-align: left;
+    }
 
     .list-item.placeholder {
         .list-item-right {
@@ -88,6 +94,16 @@ export default class ListItem extends Vue {
             text-align-last: right;
             text-align: -webkit-right;
         }
+        &.left {
+            text-align: left;
+            text-align-last: left;
+            text-align: -webkit-left;
+        }
+        &.center {
+            text-align: center;
+            text-align-last: center;
+            text-align: -webkit-center;
+        }
         &.two {
             height: 44px;
         }
@@ -112,6 +128,9 @@ export default class ListItem extends Vue {
         border: 0;
         vertical-align: middle;
         resize: none;
+        &::-webkit-input-placeholder {
+            color: @color-placeholder;
+        }
     }
     .list-item-textarea-length {
         text-align: right;

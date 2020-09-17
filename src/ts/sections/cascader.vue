@@ -1,8 +1,13 @@
 <template>
     <ListItem class="compact-cascader" :class="clazz">
         <label slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
-        <div slot="content" class="list-item-content right" :class="{placeholder: name.length === 0}" @click="onClickPlaceholder">
+        <div slot="content" class="list-item-content" :class="[name.length === 0 ? 'placeholder' : '', textAlign]" @click="onClickPlaceholder">
             {{name || placeholder}}
+        </div>
+        <div slot="right" v-if="rightArrow" class="compact-cascader__arrows">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#iconxiangyou"></use>
+            </svg>
         </div>
 
         <van-popup slot="extra" v-model="visible" position="bottom">
@@ -38,6 +43,10 @@ export default class CompactCascader extends Vue {
     @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
     /** class */
     @Prop() public clazz?: any;
+    /** 文本对齐 */
+    @Prop({ type: String, default: 'right' }) public textAlign!: string;
+    /** 是否显示右边箭头 */
+    @Prop({ type: Boolean, default: false }) public rightArrow?: boolean;
 
     public visible = false;
     public ids: number[] = [];
@@ -92,6 +101,10 @@ export default class CompactCascader extends Vue {
 .compact-cascader {
     .is-error {
         color: @color-red;
+    }
+    .icon {
+        width: 1.5em;
+        height: 1.5em;
     }
     .placeholder {
         color: @color-placeholder;

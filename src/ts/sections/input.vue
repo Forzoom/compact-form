@@ -1,9 +1,9 @@
 <template>
     <ListItem class="compact-input" :class="clazz">
-        <label slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
+        <label v-if="title" slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
-            <input v-if="type == 'text'" v-model="v" class="list-input right block" type="text" :placeholder="placeholder" @blur="onBlur" />
-            <input v-if="type == 'tel'" v-model="v" class="list-input right block" type="tel" :placeholder="placeholder" @blur="onBlur" />
+            <input v-if="type == 'text'" v-model="v" class="list-input block" :class="[textAlign]" type="text" :placeholder="placeholder" @blur="onBlur" />
+            <input v-if="type == 'tel'" v-model="v" class="list-input block" :class="[textAlign]" type="tel" :placeholder="placeholder" @blur="onBlur" />
         </div>
     </ListItem>
 </template>
@@ -21,14 +21,16 @@ import ListItem from './listItem.vue';
 export default class CompactInput extends Vue {
     /** 标题 */
     @Prop({ type: String }) public title!: any;
-    // 是否必填
+    /** 是否必填 */
     @Prop({ type: Boolean, default: false }) public required!: any;
-    // 数据
+    /** 数据 */
     @Prop({}) public value!: any;
-    // placeholder
+    /** placeholder */
     @Prop({ type: String, default: '点击输入' }) public placeholder!: any;
-    /** 类别 */
+    /** 类别 text tel */
     @Prop({ type: String, default: 'text' }) public type!: any;
+    /** 文本对齐 left right */
+    @Prop({ type: String, default: 'right' }) public textAlign!: any;
     /** 是否通过验证 */
     @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
     /** class */

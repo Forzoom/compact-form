@@ -1,5 +1,13 @@
-import 'core-js/modules/es.function.name';
+import 'core-js/modules/es.array.index-of';
+import 'core-js/modules/es.array.slice';
+import 'core-js/modules/es.object.define-property';
+import 'core-js/modules/es.date.to-string';
+import 'core-js/modules/es.object.to-string';
+import 'core-js/modules/es.regexp.to-string';
 import 'core-js/modules/es.array.join';
+import 'core-js/modules/es.regexp.exec';
+import 'core-js/modules/es.string.split';
+import 'core-js/modules/es.function.name';
 import 'core-js/modules/es.array.map';
 import 'core-js/modules/es.symbol';
 import 'core-js/modules/es.symbol.description';
@@ -9,23 +17,40 @@ import 'core-js/modules/es.symbol.to-string-tag';
 import 'core-js/modules/es.array.for-each';
 import 'core-js/modules/es.array.iterator';
 import 'core-js/modules/es.array.reverse';
-import 'core-js/modules/es.array.slice';
-import 'core-js/modules/es.date.to-string';
 import 'core-js/modules/es.json.to-string-tag';
 import 'core-js/modules/es.math.to-string-tag';
 import 'core-js/modules/es.object.create';
-import 'core-js/modules/es.object.define-property';
 import 'core-js/modules/es.object.get-prototype-of';
 import 'core-js/modules/es.object.set-prototype-of';
-import 'core-js/modules/es.object.to-string';
 import 'core-js/modules/es.promise';
-import 'core-js/modules/es.regexp.to-string';
 import 'core-js/modules/es.string.iterator';
 import 'core-js/modules/web.dom-collections.for-each';
 import 'core-js/modules/web.dom-collections.iterator';
 import 'core-js/modules/es.number.constructor';
 import 'core-js/modules/es.array.filter';
 import 'core-js/modules/es.array.concat';
+
+function createCommonjsModule(fn, module) {
+  return module = {
+    exports: {}
+  }, fn(module, module.exports), module.exports;
+}
+
+var _global = createCommonjsModule(function (module) {
+  // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+  var global = module.exports = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self // eslint-disable-next-line no-new-func
+  : Function('return this')();
+  if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+});
+
+var _core = createCommonjsModule(function (module) {
+  var core = module.exports = {
+    version: '2.6.11'
+  };
+  if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+});
+
+var _core_1 = _core.version;
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -79,12 +104,310 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function createCommonjsModule(fn, module) {
-  return module = {
-    exports: {}
-  }, fn(module, module.exports), module.exports;
-}
+var _isObject = function _isObject(it) {
+  return _typeof(it) === 'object' ? it !== null : typeof it === 'function';
+};
 
+var _anObject = function _anObject(it) {
+  if (!_isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+var _fails = function _fails(exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
+};
+
+var _descriptors = !_fails(function () {
+  return Object.defineProperty({}, 'a', {
+    get: function get() {
+      return 7;
+    }
+  }).a != 7;
+});
+
+var document$1 = _global.document; // typeof document.createElement is 'object' in old IE
+
+var is = _isObject(document$1) && _isObject(document$1.createElement);
+
+var _domCreate = function _domCreate(it) {
+  return is ? document$1.createElement(it) : {};
+};
+
+var _ie8DomDefine = !_descriptors && !_fails(function () {
+  return Object.defineProperty(_domCreate('div'), 'a', {
+    get: function get() {
+      return 7;
+    }
+  }).a != 7;
+}); // instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+
+
+var _toPrimitive = function _toPrimitive(it, S) {
+  if (!_isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !_isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !_isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !_isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+var dP = Object.defineProperty;
+var f = _descriptors ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  _anObject(O);
+
+  P = _toPrimitive(P, true);
+
+  _anObject(Attributes);
+
+  if (_ie8DomDefine) try {
+    return dP(O, P, Attributes);
+  } catch (e) {
+    /* empty */
+  }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+var _objectDp = {
+  f: f
+};
+
+var _propertyDesc = function _propertyDesc(bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+var _hide = _descriptors ? function (object, key, value) {
+  return _objectDp.f(object, key, _propertyDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+var hasOwnProperty = {}.hasOwnProperty;
+
+var _has = function _has(it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+var id = 0;
+var px = Math.random();
+
+var _uid = function _uid(key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+var _shared = createCommonjsModule(function (module) {
+  var SHARED = '__core-js_shared__';
+  var store = _global[SHARED] || (_global[SHARED] = {});
+  (module.exports = function (key, value) {
+    return store[key] || (store[key] = value !== undefined ? value : {});
+  })('versions', []).push({
+    version: _core.version,
+    mode: 'global',
+    copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
+  });
+});
+
+var _functionToString = _shared('native-function-to-string', Function.toString);
+
+var _redefine = createCommonjsModule(function (module) {
+  var SRC = _uid('src');
+
+  var TO_STRING = 'toString';
+
+  var TPL = ('' + _functionToString).split(TO_STRING);
+
+  _core.inspectSource = function (it) {
+    return _functionToString.call(it);
+  };
+
+  (module.exports = function (O, key, val, safe) {
+    var isFunction = typeof val == 'function';
+    if (isFunction) _has(val, 'name') || _hide(val, 'name', key);
+    if (O[key] === val) return;
+    if (isFunction) _has(val, SRC) || _hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
+
+    if (O === _global) {
+      O[key] = val;
+    } else if (!safe) {
+      delete O[key];
+
+      _hide(O, key, val);
+    } else if (O[key]) {
+      O[key] = val;
+    } else {
+      _hide(O, key, val);
+    } // add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+
+  })(Function.prototype, TO_STRING, function toString() {
+    return typeof this == 'function' && this[SRC] || _functionToString.call(this);
+  });
+});
+
+var _aFunction = function _aFunction(it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+var _ctx = function _ctx(fn, that, length) {
+  _aFunction(fn);
+
+  if (that === undefined) return fn;
+
+  switch (length) {
+    case 1:
+      return function (a) {
+        return fn.call(that, a);
+      };
+
+    case 2:
+      return function (a, b) {
+        return fn.call(that, a, b);
+      };
+
+    case 3:
+      return function (a, b, c) {
+        return fn.call(that, a, b, c);
+      };
+  }
+
+  return function ()
+  /* ...args */
+  {
+    return fn.apply(that, arguments);
+  };
+};
+
+var PROTOTYPE = 'prototype';
+
+var $export = function $export(type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var target = IS_GLOBAL ? _global : IS_STATIC ? _global[name] || (_global[name] = {}) : (_global[name] || {})[PROTOTYPE];
+  var exports = IS_GLOBAL ? _core : _core[name] || (_core[name] = {});
+  var expProto = exports[PROTOTYPE] || (exports[PROTOTYPE] = {});
+  var key, own, out, exp;
+  if (IS_GLOBAL) source = name;
+
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined; // export native or passed
+
+    out = (own ? target : source)[key]; // bind timers to global for call from export context
+
+    exp = IS_BIND && own ? _ctx(out, _global) : IS_PROTO && typeof out == 'function' ? _ctx(Function.call, out) : out; // extend global
+
+    if (target) _redefine(target, key, out, type & $export.U); // export
+
+    if (exports[key] != out) _hide(exports, key, exp);
+    if (IS_PROTO && expProto[key] != out) expProto[key] = out;
+  }
+};
+
+_global.core = _core; // type bitmap
+
+$export.F = 1; // forced
+
+$export.G = 2; // global
+
+$export.S = 4; // static
+
+$export.P = 8; // proto
+
+$export.B = 16; // bind
+
+$export.W = 32; // wrap
+
+$export.U = 64; // safe
+
+$export.R = 128; // real proto method for `library`
+
+var _export = $export;
+var navigator$1 = _global.navigator;
+
+var _userAgent = navigator$1 && navigator$1.userAgent || '';
+
+var slice = [].slice;
+var MSIE = /MSIE .\./.test(_userAgent); // <- dirty ie9- check
+
+var wrap = function wrap(set) {
+  return function (fn, time
+  /* , ...args */
+  ) {
+    var boundArgs = arguments.length > 2;
+    var args = boundArgs ? slice.call(arguments, 2) : false;
+    return set(boundArgs ? function () {
+      // eslint-disable-next-line no-new-func
+      (typeof fn == 'function' ? fn : Function(fn)).apply(this, args);
+    } : fn, time);
+  };
+};
+
+_export(_export.G + _export.B + _export.F * MSIE, {
+  setTimeout: wrap(_global.setTimeout),
+  setInterval: wrap(_global.setInterval)
+});
+
+!function (e) {
+  var t,
+      n,
+      _o,
+      i,
+      c,
+      d,
+      _a,
+      l = '<svg><symbol id="iconxiangyou" viewBox="0 0 1024 1024"><path d="M426.666667 256L366.506667 316.16 561.92 512l-195.413333 195.84L426.666667 768l256-256z"  ></path></symbol><symbol id="iconxiangji1" viewBox="0 0 1024 1024"><path d="M887.844571 314.148571h-112.091428c-26.075429 0-47.908571-21.174857-47.908572-47.945142V194.267429c0-26.075429-21.211429-47.908571-47.981714-47.908572H359.789714c-26.075429 0-47.908571 21.138286-47.908571 47.908572v72.630857c0 26.075429-21.174857 47.908571-47.945143 47.908571H151.844571c-26.112 0-47.945143 21.211429-47.945142 47.981714v496.274286c0 26.112 21.138286 47.981714 47.908571 47.981714h736.036571c26.075429 0 47.908571-21.174857 47.908572-47.945142V362.057143c0-26.112-21.101714-47.945143-47.908572-47.945143zM518.436571 759.698286a170.752 170.752 0 0 1-170.605714-170.605715c0-93.769143 76.836571-170.605714 170.605714-170.605714a170.752 170.752 0 0 1 170.605715 170.605714 170.752 170.752 0 0 1-170.605715 170.605715z"  ></path></symbol></svg>',
+      s = (t = document.getElementsByTagName("script"))[t.length - 1].getAttribute("data-injectcss");
+
+  if (s && !e.__iconfont__svg__cssinject__) {
+    e.__iconfont__svg__cssinject__ = !0;
+
+    try {
+      document.write("<style>.svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}</style>");
+    } catch (e) {
+      console && console.log(e);
+    }
+  }
+
+  function r() {
+    d || (d = !0, i());
+  }
+
+  n = function n() {
+    var e,
+        t,
+        n,
+        o,
+        i,
+        c = document.createElement("div");
+    c.innerHTML = l, l = null, (e = c.getElementsByTagName("svg")[0]) && (e.setAttribute("aria-hidden", "true"), e.style.position = "absolute", e.style.width = 0, e.style.height = 0, e.style.overflow = "hidden", t = e, (n = document.body).firstChild ? (o = t, (i = n.firstChild).parentNode.insertBefore(o, i)) : n.appendChild(t));
+  }, document.addEventListener ? ~["complete", "loaded", "interactive"].indexOf(document.readyState) ? setTimeout(n, 0) : (_o = function o() {
+    document.removeEventListener("DOMContentLoaded", _o, !1), n();
+  }, document.addEventListener("DOMContentLoaded", _o, !1)) : document.attachEvent && (i = n, c = e.document, d = !1, (_a = function a() {
+    try {
+      c.documentElement.doScroll("left");
+    } catch (e) {
+      return void setTimeout(_a, 50);
+    }
+
+    r();
+  })(), c.onreadystatechange = function () {
+    "complete" == c.readyState && (c.onreadystatechange = null, r());
+  });
+}(window);
 var runtime_1 = createCommonjsModule(function (module) {
   /**
    * Copyright (c) 2014-present, Facebook, Inc.
@@ -1313,15 +1636,15 @@ __vue_render__$1._withStripped = true;
 
 var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-3dc515a4_0", {
-    source: ".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 25px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n",
+  inject("data-v-71a70dda_0", {
+    source: ".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item-content.center {\n  text-align: center;\n}\n.list-item .list-item-content.left {\n  text-align: left;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.left {\n  text-align: left;\n  text-align-last: left;\n  text-align: -webkit-left;\n}\n.list-item .list-input.center {\n  text-align: center;\n  text-align-last: center;\n  text-align: -webkit-center;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n",
     map: {
       "version": 3,
       "sources": ["listItem.vue", "/Volumes/Repo2/repo/rebirth-project/compact-form/src/js/sections/listItem.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;AACb;AACA;EACE,eAAe;EACf,iBAAiB;EACjB,6BAA6B;EAC7B,SAAS;EACT,gBAAgB;EAChB,wBAAwB;EACxB,sBAAsB;AACxB;AACA;EACE,WAAW;AACb;AACA;ECCA,iBAAA;EDCE,sBAAsB;ECCxB,yBAAA;AACA;AACA;EACA,YAAA;ADCA;ACCA;EACA,cAAA;AACA;AACA;EACA,cAAA;AACA;AACA;EACA,iBAAA;EACA,sBAAA;EDCE,yBAAyB;ACC3B;AACA;EACA,WAAA;EACA,eAAA;EACA,iBAAA;EACA,SAAA;EACA,sBAAA;EACA,YAAA;AACA;AACA;EACA,iBAAA;AACA;AACA;EACA,cAAA;AACA;ADCA;ECCA,kBAAA;EACA,MAAA;EACA,QAAA;EACA,SAAA;EACA,OAAA;EDCE,WAAW;ECCb,UAAA;AACA",
+      "mappings": "AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,WAAW;AACb;AACA;EACE,eAAe;EACf,iBAAiB;EACjB,6BAA6B;EAC7B,SAAS;EACT,gBAAgB;EAChB,wBAAwB;ECC1B,sBAAA;ADCA;ACCA;EACA,WAAA;AACA;AACA;EDCE,iBAAiB;ECCnB,sBAAA;EACA,yBAAA;AACA;AACA;EACA,gBAAA;EACA,qBAAA;EACA,wBAAA;AACA;AACA;EDCE,kBAAkB;ECCpB,uBAAA;EACA,0BAAA;AACA;AACA;EACA,YAAA;AACA;AACA;EACA,cAAA;AACA;AACA;EACA,cAAA;AACA;AACA;EACA,iBAAA;EACA,sBAAA;EACA,yBAAA;AACA;AACA;EACA,WAAA;EACA,eAAA;EACA,iBAAA;EDCE,SAAS;ECCX,sBAAA;EACA,YAAA;AACA;AACA;EACA,cAAA;ADCA;ACCA;EACA,iBAAA;AACA;AACA;EACA,cAAA;AACA;AACA;EACA,kBAAA;EACA,MAAA;EACA,QAAA;EACA,SAAA;EACA,OAAA;EACA,WAAA;EACA,UAAA;AACA",
       "file": "listItem.vue",
-      "sourcesContent": [".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 25px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n", "<template>\n\n    <div class=\"list-item\" :class=\"['padding-' + padding]\">\n        <slot>\n            <div class=\"clearfix\">\n                <div class=\"list-item-left\">\n                    <slot name=\"left\"></slot>\n                </div>\n                <div class=\"list-item-right\">\n                    <slot name=\"right\"></slot>\n                </div>\n                <slot name=\"content\"></slot>\n            </div>\n        </slot>\n        <slot name=\"extra\"></slot>\n    </div>\n\n</template>\n<script lang=\"js\">\n\n/**\n * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效\n */\nexport default {\n    name: 'ListItem',\n\n    props: {\n        padding: { type: String, default: 'normal' },\n    },\n\n    data: function data() {\n        return {};\n    },\n\n    computed: {},\n    watch: {},\n    methods: {},\n};\n</script>\n<style lang=\"less\">\n\n@import \"../../lib/style/mixins.less\";\n\n@list-font-size: 16px;\n@list-line-height: 25px;\n@list-padding-v: 12px;\n@list-padding-h: 15px;\n\n.list-item {\n    position: relative;\n    padding: @list-padding-v @list-padding-h;\n    font-size: @list-font-size;\n    line-height: @list-line-height;\n    color: #000;\n    &.padding-small {\n        padding: 7px 10px;\n    }\n\n    .list-item-left {\n        float: left;\n        max-width: 60%;\n    }\n    .list-item-right {\n        float: right;\n    }\n    .list-item-content {\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n    }\n    .list-item-content.right {\n        text-align: right;\n    }\n\n    .list-item.placeholder {\n        .list-item-right {\n            color: #999;\n        }\n    }\n\n    // 应用在input上\n    .list-input {\n        font-size: 16px;\n        line-height: 22px;\n        background-color: transparent;\n        border: 0;\n        // 删除原本样式\n        appearance: none;\n        -webkit-appearance: none;\n        box-sizing: border-box;\n        &.block {\n            width: 100%;\n        }\n        // 内容局右\n        &.right {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n        &.two {\n            height: 44px;\n        }\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    select.list-input.right {\n        direction: rtl;\n        option {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n    }\n\n    // textarea的样式\n    .list-item-textarea {\n        width: 100%;\n        font-size: 16px;\n        line-height: 22px;\n        border: 0;\n        vertical-align: middle;\n        resize: none;\n    }\n    .list-item-textarea-length {\n        text-align: right;\n    }\n    .list-required {\n        color: #fc4548;\n    }\n    // select的样式\n    .list-item-placeholder-select {\n        position: absolute;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        opacity: 0;\n    }\n}\n\n</style>\n"]
+      "sourcesContent": [".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item-content.center {\n  text-align: center;\n}\n.list-item .list-item-content.left {\n  text-align: left;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.left {\n  text-align: left;\n  text-align-last: left;\n  text-align: -webkit-left;\n}\n.list-item .list-input.center {\n  text-align: center;\n  text-align-last: center;\n  text-align: -webkit-center;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n.list-item .list-item-placeholder-select {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  opacity: 0;\n}\n", "<template>\n\n    <div class=\"list-item\" :class=\"['padding-' + padding]\">\n        <slot>\n            <div class=\"clearfix\">\n                <div class=\"list-item-left\">\n                    <slot name=\"left\"></slot>\n                </div>\n                <div class=\"list-item-right\">\n                    <slot name=\"right\"></slot>\n                </div>\n                <slot name=\"content\"></slot>\n            </div>\n        </slot>\n        <slot name=\"extra\"></slot>\n    </div>\n\n</template>\n<script lang=\"js\">\n\n/**\n * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效\n */\nexport default {\n    name: 'ListItem',\n\n    props: {\n        padding: { type: String, default: 'normal' },\n    },\n\n    data: function data() {\n        return {};\n    },\n\n    computed: {},\n    watch: {},\n    methods: {},\n};\n</script>\n<style lang=\"less\">\n\n@import \"../../lib/style/mixins.less\";\n\n@list-font-size: 16px;\n@list-line-height: 24px;\n@list-padding-v: 12px;\n@list-padding-h: 15px;\n\n.list-item {\n    position: relative;\n    padding: @list-padding-v @list-padding-h;\n    font-size: @list-font-size;\n    line-height: @list-line-height;\n    color: #000;\n    &.padding-small {\n        padding: 7px 10px;\n    }\n\n    .list-item-left {\n        float: left;\n        max-width: 60%;\n    }\n    .list-item-right {\n        float: right;\n    }\n    .list-item-content {\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n    }\n    .list-item-content.right {\n        text-align: right;\n    }\n    .list-item-content.center {\n        text-align: center;\n    }\n    .list-item-content.left {\n        text-align: left;\n    }\n\n    .list-item.placeholder {\n        .list-item-right {\n            color: #999;\n        }\n    }\n\n    // 应用在input上\n    .list-input {\n        font-size: 16px;\n        line-height: 22px;\n        background-color: transparent;\n        border: 0;\n        // 删除原本样式\n        appearance: none;\n        -webkit-appearance: none;\n        box-sizing: border-box;\n        &.block {\n            width: 100%;\n        }\n        // 内容局右\n        &.right {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n        &.left {\n            text-align: left;\n            text-align-last: left;\n            text-align: -webkit-left;\n        }\n        &.center {\n            text-align: center;\n            text-align-last: center;\n            text-align: -webkit-center;\n        }\n        &.two {\n            height: 44px;\n        }\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    select.list-input.right {\n        direction: rtl;\n        option {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n    }\n\n    // textarea的样式\n    .list-item-textarea {\n        width: 100%;\n        font-size: 16px;\n        line-height: 22px;\n        border: 0;\n        vertical-align: middle;\n        resize: none;\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    .list-item-textarea-length {\n        text-align: right;\n    }\n    .list-required {\n        color: #fc4548;\n    }\n    // select的样式\n    .list-item-placeholder-select {\n        position: absolute;\n        top: 0;\n        right: 0;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        opacity: 0;\n    }\n}\n\n</style>\n"]
     },
     media: undefined
   });
@@ -1383,7 +1706,19 @@ var script$2 = {
     },
 
     /** class */
-    clazz: {}
+    clazz: {},
+
+    /** 文本对齐 */
+    textAlign: {
+      type: String,
+      "default": 'right'
+    },
+
+    /** 是否显示右边箭头 */
+    rightArrow: {
+      type: Boolean,
+      "default": false
+    }
   },
   data: function data() {
     return {
@@ -1494,10 +1829,8 @@ var __vue_render__$2 = function __vue_render__() {
   }, [_vm._v(_vm._s(_vm.title)), _vm.required ? _c("span", {
     staticClass: "list-required"
   }, [_vm._v("*")]) : _vm._e()]), _vm._v(" "), _c("div", {
-    staticClass: "list-item-content right",
-    "class": {
-      placeholder: _vm.name.length === 0
-    },
+    staticClass: "list-item-content",
+    "class": [_vm.name.length === 0 ? "placeholder" : "", _vm.textAlign],
     attrs: {
       slot: "content"
     },
@@ -1505,7 +1838,22 @@ var __vue_render__$2 = function __vue_render__() {
       click: _vm.onClickPlaceholder
     },
     slot: "content"
-  }, [_vm._v("\n        " + _vm._s(_vm.name || _vm.placeholder) + "\n    ")]), _vm._v(" "), _c("van-popup", {
+  }, [_vm._v("\n        " + _vm._s(_vm.name || _vm.placeholder) + "\n    ")]), _vm._v(" "), _vm.rightArrow ? _c("div", {
+    staticClass: "compact-cascader__arrows",
+    attrs: {
+      slot: "right"
+    },
+    slot: "right"
+  }, [_c("svg", {
+    staticClass: "icon",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_c("use", {
+    attrs: {
+      "xlink:href": "#iconxiangyou"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _c("van-popup", {
     attrs: {
       slot: "extra",
       position: "bottom"
@@ -1542,15 +1890,15 @@ __vue_render__$2._withStripped = true;
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-6643b006_0", {
-    source: ".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n",
+  inject("data-v-1d049d2b_0", {
+    source: ".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .icon {\n  width: 1.5em;\n  height: 1.5em;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,
       "sources": ["cascader.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,cAAc;AAChB;AACA;EACE,cAAc;AAChB",
+      "mappings": "AAAA;EACE,cAAc;AAChB;AACA;EACE,YAAY;EACZ,aAAa;AACf;AACA;EACE,cAAc;AAChB",
       "file": "cascader.vue",
-      "sourcesContent": [".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n"]
+      "sourcesContent": [".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .icon {\n  width: 1.5em;\n  height: 1.5em;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n"]
     },
     media: undefined
   });
@@ -1584,23 +1932,32 @@ var script$3 = {
     title: {
       type: String
     },
-    // 是否必填
+
+    /** 是否必填 */
     required: {
       type: Boolean,
       "default": false
     },
-    // 数据
+
+    /** 数据 */
     value: {},
-    // placeholder
+
+    /** placeholder */
     placeholder: {
       type: String,
       "default": '点击输入'
     },
 
-    /** 类别 */
+    /** 类别 text tel */
     type: {
       type: String,
       "default": 'text'
+    },
+
+    /** 文本对齐 left right */
+    textAlign: {
+      type: String,
+      "default": 'right'
     },
 
     /** 是否通过验证 */
@@ -1651,7 +2008,7 @@ var __vue_render__$3 = function __vue_render__() {
   return _c("ListItem", {
     staticClass: "compact-input",
     "class": _vm.clazz
-  }, [_c("label", {
+  }, [_vm.title ? _c("label", {
     "class": {
       "is-error": !_vm.isValidate
     },
@@ -1661,7 +2018,7 @@ var __vue_render__$3 = function __vue_render__() {
     slot: "left"
   }, [_vm._v(_vm._s(_vm.title)), _vm.required ? _c("span", {
     staticClass: "list-required"
-  }, [_vm._v("*")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("*")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "list-item-content",
     attrs: {
       slot: "content"
@@ -1674,7 +2031,8 @@ var __vue_render__$3 = function __vue_render__() {
       value: _vm.v,
       expression: "v"
     }],
-    staticClass: "list-input right block",
+    staticClass: "list-input block",
+    "class": [_vm.textAlign],
     attrs: {
       type: "text",
       placeholder: _vm.placeholder
@@ -1699,7 +2057,8 @@ var __vue_render__$3 = function __vue_render__() {
       value: _vm.v,
       expression: "v"
     }],
-    staticClass: "list-input right block",
+    staticClass: "list-input block",
+    "class": [_vm.textAlign],
     attrs: {
       type: "tel",
       placeholder: _vm.placeholder
@@ -2371,4 +2730,133 @@ var __vue_component__$6 = /*#__PURE__*/normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$6
 }, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
 
-export { __vue_component__$2 as CompactCascader, __vue_component__$3 as CompactInput, __vue_component__$4 as CompactSelect, __vue_component__$6 as CompactUploader, __vue_component__$1 as ListItem };
+var script$7 = {
+  name: 'CompactTextarea',
+  props: {
+    /** 标题 */
+    title: {
+      type: String
+    },
+
+    /** 数据 */
+    value: {},
+
+    /** 占位 */
+    placeholder: {
+      type: String,
+      "default": '点击输入'
+    },
+
+    /** class */
+    clazz: {}
+  },
+  data: function data() {
+    return {
+      /** 值 */
+      v: null
+    };
+  },
+  computed: {},
+  watch: {
+    '$props.value': function $propsValue(val) {
+      this.v = val;
+    },
+    v: function v(val) {
+      this.$emit('input', val);
+    }
+  },
+  methods: {
+    onBlur: function onBlur() {
+      this.$emit('blur');
+    }
+  },
+  created: function created() {
+    this.v = this.value;
+  }
+};
+/* script */
+
+var __vue_script__$7 = script$7;
+/* template */
+
+var __vue_render__$7 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("div", {
+    staticClass: "compact-textarea",
+    "class": _vm.clazz
+  }, [_vm.title ? _c("div", {
+    staticClass: "compact-textarea__title"
+  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "compact-textarea__content"
+  }, [_c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.v,
+      expression: "v"
+    }],
+    staticClass: "compact-textarea__textarea",
+    attrs: {
+      placeholder: _vm.placeholder,
+      rows: 4
+    },
+    domProps: {
+      value: _vm.v
+    },
+    on: {
+      blur: _vm.onBlur,
+      input: function input($event) {
+        if ($event.target.composing) {
+          return;
+        }
+
+        _vm.v = $event.target.value;
+      }
+    }
+  })])]);
+};
+
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-3dd1524f_0", {
+    source: ".compact-textarea__title {\n  padding: 10px 15px 0;\n}\n.compact-textarea__content {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n}\n.compact-textarea__textarea {\n  width: 100%;\n  border-radius: 4px;\n  resize: none;\n}\n.compact-textarea__textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["textarea.vue"],
+      "names": [],
+      "mappings": "AAAA;EACE,oBAAoB;AACtB;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,kBAAkB;EAClB,YAAY;AACd;AACA;EACE,cAAc;AAChB",
+      "file": "textarea.vue",
+      "sourcesContent": [".compact-textarea__title {\n  padding: 10px 15px 0;\n}\n.compact-textarea__content {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n}\n.compact-textarea__textarea {\n  width: 100%;\n  border-radius: 4px;\n  resize: none;\n}\n.compact-textarea__textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$7 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$7 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$7 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$7,
+  staticRenderFns: __vue_staticRenderFns__$7
+}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
+
+export { __vue_component__$2 as CompactCascader, __vue_component__$3 as CompactInput, __vue_component__$4 as CompactSelect, __vue_component__$7 as CompactTextarea, __vue_component__$6 as CompactUploader, __vue_component__$1 as ListItem };

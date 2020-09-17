@@ -48,6 +48,20 @@ export type CompactSelectComponentOptions = ComponentOptions<Vue, object, object
 
 export const CompactSelect: CompactSelectComponentOptions;
 
+// textarea
+interface CompactTextareaProp {
+    /** 标题 */
+    title?: string;
+    /** 占位 */
+    placeholder?: string;
+    /** class */
+    clazz?: string[];
+}
+export type CompactTextareaComponent = CombinedVueInstance<Vue, object, object, object, CompactTextareaProp>;
+export type CompactTextareaComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<CompactTextareaProp>, CompactTextareaProp>;
+
+export const CompactTextarea: CompactTextareaComponentOptions;
+
 // uploader
 interface CompactUploaderProp {
     title?: string;

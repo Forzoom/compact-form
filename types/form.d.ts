@@ -11,14 +11,12 @@ export interface ValidateRule {
 export interface CompactFormBasicSectionMeta {
     type: string;
     key: string;
-    titleComponent: boolean;
     validates?: ValidateRule[];
 }
 
 // cascader
 export interface CompactCascaderMeta extends CompactFormBasicSectionMeta {
     type: 'CompactCascader';
-    titleComponent: true;
     props: {
         title?: string;
         titleHint?: string;
@@ -27,19 +25,24 @@ export interface CompactCascaderMeta extends CompactFormBasicSectionMeta {
         fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
         /** class */
         clazz?: string[];
+        /** 文本对齐方式 */
+        textAlign?: 'left' | 'center' | 'right';
+        /** 是否显示右边的箭头 */
+        rightArrow?: boolean;
     };
 }
 
 // input
 export interface CompactInputMeta extends CompactFormBasicSectionMeta {
     type: 'CompactInput';
-    titleComponent: true;
     props?: {
         title?: string;
         /** 是否显示星号 */
         required?: boolean;
         placeholder?: string;
         type?: 'text' | 'tel';
+        /** 文本对齐方式 */
+        textAlign?: 'left' | 'center' | 'right';
         /** class */
         clazz?: string[];
     };
@@ -48,7 +51,6 @@ export interface CompactInputMeta extends CompactFormBasicSectionMeta {
 // select
 export interface CompactSelectMeta extends CompactFormBasicSectionMeta {
     type: 'CompactSelect';
-    titleComponent: true;
     props?: {
         title?: string;
         /** 是否显示星号 */
@@ -61,10 +63,22 @@ export interface CompactSelectMeta extends CompactFormBasicSectionMeta {
     };
 }
 
+// textarea
+export interface CompactTextareaMeta extends CompactFormBasicSectionMeta {
+    type: 'CompactTextarea';
+    props?: {
+        /** 标题 */
+        title?: string;
+        /** 占位 */
+        placeholder?: string;
+        /** class */
+        clazz?: string[];
+    };
+}
+
 // uploader
 export interface CompactUploaderMeta extends CompactFormBasicSectionMeta {
     type: 'CompactUploader';
-    titleComponent: false;
     props?: {
         /** 标题 */
         title?: string;
@@ -79,7 +93,7 @@ export interface CompactUploaderMeta extends CompactFormBasicSectionMeta {
     };
 }
 
-export type CompactFormSectionMeta = CompactCascaderMeta | CompactInputMeta | CompactSelectMeta | CompactUploaderMeta;
+export type CompactFormSectionMeta = CompactCascaderMeta | CompactInputMeta | CompactSelectMeta | CompactTextareaMeta | CompactUploaderMeta;
 
 export interface ValueText {
     value: any;

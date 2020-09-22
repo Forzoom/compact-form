@@ -36,6 +36,7 @@ export default class ListItem extends Vue {
 @list-line-height: 24px;
 @list-padding-v: 12px;
 @list-padding-h: 15px;
+@placeholder-color: #999;
 
 .list-item {
     position: relative;
@@ -58,6 +59,10 @@ export default class ListItem extends Vue {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+
+        select.list-input.placeholder {
+            color: @placeholder-color;
+        }
     }
     .list-item-content.right {
         text-align: right;
@@ -71,7 +76,7 @@ export default class ListItem extends Vue {
 
     .list-item.placeholder {
         .list-item-right {
-            color: #999;
+            color: @placeholder-color;
         }
     }
 
@@ -137,16 +142,6 @@ export default class ListItem extends Vue {
     }
     .list-required {
         color: #fc4548;
-    }
-    // select的样式
-    .list-item-placeholder-select {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        opacity: 0;
     }
 }
 </style>

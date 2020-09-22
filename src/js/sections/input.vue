@@ -75,3 +75,13 @@ export default {
     },
 };
 </script>
+
+<style lang="less">
+@import "../../lib/style/mixins.less";
+
+.compact-input {
+    .is-error {
+        color: @color-red;
+    }
+}
+</style>

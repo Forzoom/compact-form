@@ -1,3 +1,15 @@
+export interface TitleMixin {
+    title?: string;
+    required?: boolean;
+}
+
+export interface PlaceholderMixin {
+    /** 文本对齐方式 */
+    textAlign?: 'left' | 'center' | 'right';
+    /** 占位内容 */
+    placeholder?: string;
+}
+
 export interface ValidateRule {
     required?: boolean;
     pattern?: RegExp;
@@ -17,18 +29,28 @@ export interface CompactFormBasicSectionMeta {
 // cascader
 export interface CompactCascaderMeta extends CompactFormBasicSectionMeta {
     type: 'CompactCascader';
-    props: {
-        title?: string;
-        titleHint?: string;
-        placeholder?: string;
+    props: TitleMixin & PlaceholderMixin & {
         /** 获取列表数据 */
         fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
         /** class */
         clazz?: string[];
-        /** 文本对齐方式 */
-        textAlign?: 'left' | 'center' | 'right';
         /** 是否显示右边的箭头 */
         rightArrow?: boolean;
+    };
+}
+
+// date
+export interface CompactDateMeta extends CompactFormBasicSectionMeta {
+    type: 'CompactDate';
+    props: TitleMixin & PlaceholderMixin & {
+        /** class */
+        clazz?: string[];
+        /** 是否显示右边的箭头 */
+        rightArrow?: boolean;
+        minDate?: Date;
+        maxDate?: Date;
+        formatter?: any;
+        type: 'date' | 'datetime' | 'time' | 'year-month' | 'month-day' | 'datehour';
     };
 }
 
@@ -93,7 +115,7 @@ export interface CompactUploaderMeta extends CompactFormBasicSectionMeta {
     };
 }
 
-export type CompactFormSectionMeta = CompactCascaderMeta | CompactInputMeta | CompactSelectMeta | CompactTextareaMeta | CompactUploaderMeta;
+export type CompactFormSectionMeta = CompactCascaderMeta | CompactDateMeta | CompactInputMeta | CompactSelectMeta | CompactTextareaMeta | CompactUploaderMeta;
 
 export interface ValueText {
     value: any;

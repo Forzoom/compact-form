@@ -36,7 +36,6 @@ export default class ListItem extends Vue {
 @list-line-height: 24px;
 @list-padding-v: 12px;
 @list-padding-h: 15px;
-@placeholder-color: #999;
 
 .list-item {
     position: relative;
@@ -61,22 +60,25 @@ export default class ListItem extends Vue {
         white-space: nowrap;
 
         select.list-input.placeholder {
-            color: @placeholder-color;
+            color: @color-placeholder;
         }
-    }
-    .list-item-content.right {
-        text-align: right;
-    }
-    .list-item-content.center {
-        text-align: center;
-    }
-    .list-item-content.left {
-        text-align: left;
+        &.right {
+            text-align: right;
+        }
+        &.center {
+            text-align: center;
+        }
+        &.left {
+            text-align: left;
+        }
+        &.placeholder {
+            color: @color-placeholder;
+        }
     }
 
     .list-item.placeholder {
         .list-item-right {
-            color: @placeholder-color;
+            color: @color-placeholder;
         }
     }
 

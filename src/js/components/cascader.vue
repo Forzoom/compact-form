@@ -25,7 +25,7 @@
 <script lang="js">
 import {
     isUndef,
-} from '../utils';
+} from '../../lib/utils';
 
 /**
  * @update(names, ids) 数据更新

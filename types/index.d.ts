@@ -1,7 +1,25 @@
-import { CombinedVueInstance } from 'vue/types/vue';
+import { CombinedVueInstance, ExtendedVue } from 'vue/types/vue';
 import { PropsDefinition, DefaultMethods, DefaultComputed } from 'vue/types/options';
 import { ComponentOptions } from 'vue';
-import { CascaderItem, ValueText, ImageInfo } from './form';
+import { TitleMixin, PlaceholderMixin, CascaderItem, ValueText, ImageInfo } from './form';
+
+export const Title: ExtendedVue<Vue, unknown, unknown, unknown, {
+    title: string;
+    required: boolean;
+}>
+
+export const Placeholder: ExtendedVue<Vue, {
+    visible: boolean;
+}, {
+    onClickPlaceholder(): void;
+}, unknown, {
+    textAlign: string;
+    placeholder: string;
+}>
+
+export const Validate: ExtendedVue<Vue, unknown, unknown, unknown, {
+    isValidate: boolean;
+}>
 
 // cascader
 interface CompactCascaderProp {
@@ -16,6 +34,21 @@ export type CompactCascaderComponent = CombinedVueInstance<Vue, object, object, 
 export type CompactCascaderComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<CompactCascaderProp>, CompactCascaderProp>;
 
 export const CompactCascader: CompactCascaderComponentOptions;
+
+// date
+type CompactDateProp = TitleMixin & PlaceholderMixin & {
+    /** class */
+    clazz?: string[];
+    rightArrow?: boolean;
+    minDate?: Date;
+    maxDate?: Date;
+    formatter?: any;
+    type: 'date' | 'datetime' | 'time' | 'year-month' | 'month-day' | 'datehour';
+}
+export type CompactDateComponent = CombinedVueInstance<Vue, object, object, object, CompactDateProp>;
+export type CompactDateComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<CompactDateProp>, CompactDateProp>;
+
+export const CompactDate: CompactDateComponentOptions;
 
 // input
 interface CompactInputProp {

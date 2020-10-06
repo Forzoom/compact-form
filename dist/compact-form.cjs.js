@@ -1,5 +1,7 @@
 'use strict';
 
+function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
@@ -21,6 +23,8 @@ require('core-js/modules/es.array.join');
 require('core-js/modules/es.regexp.exec');
 
 require('core-js/modules/es.string.split');
+
+var Vue = require('vue');
 
 require('core-js/modules/es.function.name');
 
@@ -62,9 +66,19 @@ require('core-js/modules/web.dom-collections.iterator');
 
 require('core-js/modules/es.number.constructor');
 
+require('core-js/modules/es.string.replace');
+
 require('core-js/modules/es.array.filter');
 
 require('core-js/modules/es.array.concat');
+
+function _interopDefaultLegacy(e) {
+  return e && _typeof2(e) === 'object' && 'default' in e ? e : {
+    'default': e
+  };
+}
+
+var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
 
 function createCommonjsModule(fn, module) {
   return module = {
@@ -444,6 +458,51 @@ _export(_export.G + _export.B + _export.F * MSIE, {
     "complete" == c.readyState && (c.onreadystatechange = null, r());
   });
 }(window);
+var Title = Vue__default['default'].extend({
+  props: {
+    /** 标题内容，允许没有 */
+    title: {
+      type: String
+    },
+
+    /** 是否显示星号 */
+    required: {
+      type: Boolean
+    }
+  }
+});
+var Placeholder = Vue__default['default'].extend({
+  props: {
+    /** 文本对齐 */
+    textAlign: {
+      type: String,
+      "default": 'right'
+    },
+    placeholder: {
+      type: String
+    }
+  },
+  data: function data() {
+    return {
+      /** popup是否显示 */
+      visible: false
+    };
+  },
+  methods: {
+    onClickPlaceholder: function onClickPlaceholder() {
+      this.visible = true;
+    }
+  }
+});
+var Validate = Vue__default['default'].extend({
+  props: {
+    /** 数据是否有效 */
+    isValidate: {
+      type: Boolean,
+      "default": true
+    }
+  }
+});
 var runtime_1 = createCommonjsModule(function (module) {
   /**
    * Copyright (c) 2014-present, Facebook, Inc.
@@ -1178,10 +1237,66 @@ function isUndef(v) {
   return v === null || v === undefined;
 }
 /**
+ * 对于数字进行format操作
+ */
+
+
+function _format(n) {
+  if (n >= 0 && n < 10) {
+    return '0' + n;
+  } else {
+    return "".concat(n);
+  }
+}
+/**
+ * 日期格式化
+ *
+ * @param {Date|Number} v UTC+08:00
+ * @param {String} format 格式内容
+ *
+ * @return {string} 经过format的日期数据
+ */
+
+
+function dateFormat(v, format) {
+  var type = _typeof(v);
+
+  if (isUndef(v) || type !== 'number' && !(v instanceof Date)) {
+    return v;
+  } // 使用默认的format
+
+
+  if (!format) {
+    format = 'Y-M-D';
+  }
+
+  if (typeof v === 'number') {
+    v = new Date(v);
+  }
+
+  format = format.replace('Y', String(v.getFullYear())); // format = format!.replace('m', String(v.getMonth() + 1));
+
+  format = format.replace('m', String(_format(v.getMonth() + 1))); // format = format!.replace('d', String(v.getDate()));
+
+  format = format.replace('d', String(_format(v.getDate())));
+  format = format.replace('H', String(_format(v.getHours())));
+  format = format.replace('i', String(_format(v.getMinutes())));
+  format = format.replace('s', String(_format(v.getSeconds())));
+  return format;
+}
+
+var formatMap = {
+  date: 'Y-m-d',
+  datetime: 'Y-m-d H:i',
+  time: 'H:i:s',
+  'year-month': 'Y-m',
+  'month-day': 'm-d',
+  datehour: 'H:i'
+};
+/**
  * @update(names, ids) 数据更新
  * @finish() 点击最后一级的情况下触发事件，可能使用于当点击最后一级的情况下，将关闭地址选择组件
  */
-
 
 var script = {
   name: 'Cascader',
@@ -1591,7 +1706,7 @@ __vue_render__._withStripped = true;
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-6b08e5bf_0", {
+  inject("data-v-3a7cfb50_0", {
     source: ".cascader__crumb {\n  float: left;\n  padding: 7px 10px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n  border-bottom: 1px solid #fff;\n}\n.cascader__crumb.selected {\n  border-bottom: 1px solid #fc4548;\n}\n.cascader__level {\n  height: 216px;\n  -webkit-overflow-scrolling: touch;\n  overflow-y: auto;\n}\n.cascader__item {\n  position: relative;\n  padding: 7px 20px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n}\n.cascader__item:after {\n  left: 15px;\n}\n.cascader__item.selected {\n  color: #fc4548;\n}\n.cascader__item:last-child:after {\n  display: none;\n}\n",
     map: {
       "version": 3,
@@ -1672,15 +1787,15 @@ __vue_render__$1._withStripped = true;
 
 var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-0f0476b4_0", {
-    source: ".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content select.list-input.placeholder {\n  color: #999;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item-content.center {\n  text-align: center;\n}\n.list-item .list-item-content.left {\n  text-align: left;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.left {\n  text-align: left;\n  text-align-last: left;\n  text-align: -webkit-left;\n}\n.list-item .list-input.center {\n  text-align: center;\n  text-align-last: center;\n  text-align: -webkit-center;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n",
+  inject("data-v-7c61801e_0", {
+    source: ".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content select.list-input.placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item-content.center {\n  text-align: center;\n}\n.list-item .list-item-content.left {\n  text-align: left;\n}\n.list-item .list-item-content.placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #c8c8c8;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.left {\n  text-align: left;\n  text-align-last: left;\n  text-align: -webkit-left;\n}\n.list-item .list-input.center {\n  text-align: center;\n  text-align-last: center;\n  text-align: -webkit-center;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n",
     map: {
       "version": 3,
       "sources": ["listItem.vue", "/Volumes/Repo2/repo/rebirth-project/compact-form/src/js/sections/listItem.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,WAAW;AACb;AACA;EACE,eAAe;EACf,iBAAiB;EACjB,6BAA6B;ECC/B,SAAA;EDCE,gBAAgB;ECClB,wBAAA;EACA,sBAAA;AACA;AACA;EACA,WAAA;ADCA;ACCA;EACA,iBAAA;EACA,sBAAA;EACA,yBAAA;AACA;AACA;EACA,gBAAA;EACA,qBAAA;EACA,wBAAA;ADCA;ACCA;EACA,kBAAA;EACA,uBAAA;EACA,0BAAA;AACA;AACA;EACA,YAAA;AACA;AACA;EACA,cAAA;AACA;ADCA;ECCA,cAAA;AACA;AACA;EACA,iBAAA;EACA,sBAAA;EACA,yBAAA;AACA;AACA;EACA,WAAA;EACA,eAAA;EACA,iBAAA;EACA,SAAA;EACA,sBAAA;EDCE,YAAY;ACCd;AACA;EACA,cAAA;AACA;AACA;EDCE,iBAAiB;ACCnB;AACA;EACA,cAAA;AACA",
+      "mappings": "AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;AAChB;AACA;EACE,cAAc;AAChB;AACA;ECCA,eAAA;EDCE,iBAAiB;ECCnB,6BAAA;EACA,SAAA;EACA,gBAAA;EACA,wBAAA;EDCE,sBAAsB;ACCxB;AACA;EACA,WAAA;AACA;AACA;EACA,iBAAA;EACA,sBAAA;EACA,yBAAA;AACA;ADCA;ECCA,gBAAA;EACA,qBAAA;EACA,wBAAA;AACA;AACA;EACA,kBAAA;EACA,uBAAA;EACA,0BAAA;AACA;AACA;EACA,YAAA;ADCA;ACCA;EACA,cAAA;AACA;AACA;EACA,cAAA;AACA;AACA;EACA,iBAAA;EACA,sBAAA;EACA,yBAAA;AACA;AACA;EACA,WAAA;EACA,eAAA;EACA,iBAAA;EACA,SAAA;EDCE,sBAAsB;ECCxB,YAAA;AACA;AACA;EACA,cAAA;AACA;ADCA;ECCA,iBAAA;AACA;AACA;EACA,cAAA;AACA",
       "file": "listItem.vue",
-      "sourcesContent": [".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content select.list-input.placeholder {\n  color: #999;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item-content.center {\n  text-align: center;\n}\n.list-item .list-item-content.left {\n  text-align: left;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #999;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.left {\n  text-align: left;\n  text-align-last: left;\n  text-align: -webkit-left;\n}\n.list-item .list-input.center {\n  text-align: center;\n  text-align-last: center;\n  text-align: -webkit-center;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n", "<template>\n\n    <div class=\"list-item\" :class=\"['padding-' + padding]\">\n        <slot>\n            <div class=\"clearfix\">\n                <div class=\"list-item-left\">\n                    <slot name=\"left\"></slot>\n                </div>\n                <div class=\"list-item-right\">\n                    <slot name=\"right\"></slot>\n                </div>\n                <slot name=\"content\"></slot>\n            </div>\n        </slot>\n        <slot name=\"extra\"></slot>\n    </div>\n\n</template>\n<script lang=\"js\">\n\n/**\n * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效\n */\nexport default {\n    name: 'ListItem',\n\n    props: {\n        padding: { type: String, default: 'normal' },\n    },\n\n    data: function data() {\n        return {};\n    },\n\n    computed: {},\n    watch: {},\n    methods: {},\n};\n</script>\n<style lang=\"less\">\n\n@import \"../../lib/style/mixins.less\";\n\n@list-font-size: 16px;\n@list-line-height: 24px;\n@list-padding-v: 12px;\n@list-padding-h: 15px;\n@placeholder-color: #999;\n\n.list-item {\n    position: relative;\n    padding: @list-padding-v @list-padding-h;\n    font-size: @list-font-size;\n    line-height: @list-line-height;\n    color: #000;\n    &.padding-small {\n        padding: 7px 10px;\n    }\n\n    .list-item-left {\n        float: left;\n        max-width: 60%;\n    }\n    .list-item-right {\n        float: right;\n    }\n    .list-item-content {\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n\n        select.list-input.placeholder {\n            color: @placeholder-color;\n        }\n    }\n    .list-item-content.right {\n        text-align: right;\n    }\n    .list-item-content.center {\n        text-align: center;\n    }\n    .list-item-content.left {\n        text-align: left;\n    }\n\n    .list-item.placeholder {\n        .list-item-right {\n            color: @placeholder-color;\n        }\n    }\n\n    // 应用在input上\n    .list-input {\n        font-size: 16px;\n        line-height: 22px;\n        background-color: transparent;\n        border: 0;\n        // 删除原本样式\n        appearance: none;\n        -webkit-appearance: none;\n        box-sizing: border-box;\n        &.block {\n            width: 100%;\n        }\n        // 内容局右\n        &.right {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n        &.left {\n            text-align: left;\n            text-align-last: left;\n            text-align: -webkit-left;\n        }\n        &.center {\n            text-align: center;\n            text-align-last: center;\n            text-align: -webkit-center;\n        }\n        &.two {\n            height: 44px;\n        }\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    select.list-input.right {\n        direction: rtl;\n        option {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n    }\n\n    // textarea的样式\n    .list-item-textarea {\n        width: 100%;\n        font-size: 16px;\n        line-height: 22px;\n        border: 0;\n        vertical-align: middle;\n        resize: none;\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    .list-item-textarea-length {\n        text-align: right;\n    }\n    .list-required {\n        color: #fc4548;\n    }\n}\n\n</style>\n"]
+      "sourcesContent": [".list-item {\n  position: relative;\n  padding: 12px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  color: #000;\n}\n.list-item.padding-small {\n  padding: 7px 10px;\n}\n.list-item .list-item-left {\n  float: left;\n  max-width: 60%;\n}\n.list-item .list-item-right {\n  float: right;\n}\n.list-item .list-item-content {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.list-item .list-item-content select.list-input.placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-content.right {\n  text-align: right;\n}\n.list-item .list-item-content.center {\n  text-align: center;\n}\n.list-item .list-item-content.left {\n  text-align: left;\n}\n.list-item .list-item-content.placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item.placeholder .list-item-right {\n  color: #c8c8c8;\n}\n.list-item .list-input {\n  font-size: 16px;\n  line-height: 22px;\n  background-color: transparent;\n  border: 0;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n.list-item .list-input.block {\n  width: 100%;\n}\n.list-item .list-input.right {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-input.left {\n  text-align: left;\n  text-align-last: left;\n  text-align: -webkit-left;\n}\n.list-item .list-input.center {\n  text-align: center;\n  text-align-last: center;\n  text-align: -webkit-center;\n}\n.list-item .list-input.two {\n  height: 44px;\n}\n.list-item .list-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item select.list-input.right {\n  direction: rtl;\n}\n.list-item select.list-input.right option {\n  text-align: right;\n  text-align-last: right;\n  text-align: -webkit-right;\n}\n.list-item .list-item-textarea {\n  width: 100%;\n  font-size: 16px;\n  line-height: 22px;\n  border: 0;\n  vertical-align: middle;\n  resize: none;\n}\n.list-item .list-item-textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.list-item .list-item-textarea-length {\n  text-align: right;\n}\n.list-item .list-required {\n  color: #fc4548;\n}\n", "<template>\n\n    <div class=\"list-item\" :class=\"['padding-' + padding]\">\n        <slot>\n            <div class=\"clearfix\">\n                <div class=\"list-item-left\">\n                    <slot name=\"left\"></slot>\n                </div>\n                <div class=\"list-item-right\">\n                    <slot name=\"right\"></slot>\n                </div>\n                <slot name=\"content\"></slot>\n            </div>\n        </slot>\n        <slot name=\"extra\"></slot>\n    </div>\n\n</template>\n<script lang=\"js\">\n\n/**\n * 支持slot=default slot=left slot=right slot=content，当default存在时，其他3个将失效\n */\nexport default {\n    name: 'ListItem',\n\n    props: {\n        padding: { type: String, default: 'normal' },\n    },\n\n    data: function data() {\n        return {};\n    },\n\n    computed: {},\n    watch: {},\n    methods: {},\n};\n</script>\n<style lang=\"less\">\n\n@import \"../../lib/style/mixins.less\";\n\n@list-font-size: 16px;\n@list-line-height: 24px;\n@list-padding-v: 12px;\n@list-padding-h: 15px;\n\n.list-item {\n    position: relative;\n    padding: @list-padding-v @list-padding-h;\n    font-size: @list-font-size;\n    line-height: @list-line-height;\n    color: #000;\n    &.padding-small {\n        padding: 7px 10px;\n    }\n\n    .list-item-left {\n        float: left;\n        max-width: 60%;\n    }\n    .list-item-right {\n        float: right;\n    }\n    .list-item-content {\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n\n        select.list-input.placeholder {\n            color: @color-placeholder;\n        }\n        &.right {\n            text-align: right;\n        }\n        &.center {\n            text-align: center;\n        }\n        &.left {\n            text-align: left;\n        }\n        &.placeholder {\n            color: @color-placeholder;\n        }\n    }\n\n    .list-item.placeholder {\n        .list-item-right {\n            color: @color-placeholder;\n        }\n    }\n\n    // 应用在input上\n    .list-input {\n        font-size: 16px;\n        line-height: 22px;\n        background-color: transparent;\n        border: 0;\n        // 删除原本样式\n        appearance: none;\n        -webkit-appearance: none;\n        box-sizing: border-box;\n        &.block {\n            width: 100%;\n        }\n        // 内容局右\n        &.right {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n        &.left {\n            text-align: left;\n            text-align-last: left;\n            text-align: -webkit-left;\n        }\n        &.center {\n            text-align: center;\n            text-align-last: center;\n            text-align: -webkit-center;\n        }\n        &.two {\n            height: 44px;\n        }\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    select.list-input.right {\n        direction: rtl;\n        option {\n            text-align: right;\n            text-align-last: right;\n            text-align: -webkit-right;\n        }\n    }\n\n    // textarea的样式\n    .list-item-textarea {\n        width: 100%;\n        font-size: 16px;\n        line-height: 22px;\n        border: 0;\n        vertical-align: middle;\n        resize: none;\n        &::-webkit-input-placeholder {\n            color: @color-placeholder;\n        }\n    }\n    .list-item-textarea-length {\n        text-align: right;\n    }\n    .list-required {\n        color: #fc4548;\n    }\n}\n\n</style>\n"]
     },
     media: undefined
   });
@@ -1959,6 +2074,193 @@ var __vue_component__$2 = /*#__PURE__*/normalizeComponent({
 }, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, createInjector, undefined, undefined);
 
 var script$3 = {
+  name: 'CompactDate',
+  components: {
+    ListItem: __vue_component__$1
+  },
+  mixins: [Title, Placeholder, Validate],
+  props: {
+    value: {
+      type: Date
+    },
+
+    /** class */
+    clazz: {},
+
+    /** 是否显示右边箭头 */
+    rightArrow: {
+      type: Boolean,
+      "default": false
+    },
+
+    /** 最小时间 */
+    minDate: {
+      type: Date
+    },
+
+    /** 最大时间 */
+    maxDate: {
+      type: Date
+    },
+
+    /** 格式化 */
+    formatter: {
+      type: Function
+    },
+
+    /** 类型 */
+    type: {
+      required: true,
+      type: String
+    }
+  },
+  data: function data() {
+    return {
+      date: undefined
+    };
+  },
+  computed: {
+    dateStr: function dateStr() {
+      return dateFormat(this.date, formatMap[this.type]);
+    }
+  },
+  watch: {},
+  methods: {
+    confirm: function confirm(value) {
+      this.$emit('input', value);
+      this.visible = false;
+    },
+    cancel: function cancel() {
+      this.visible = false;
+    }
+  },
+  created: function created() {
+    this.date = this.value;
+  }
+};
+/* script */
+
+var __vue_script__$3 = script$3;
+/* template */
+
+var __vue_render__$3 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("ListItem", {
+    staticClass: "compact-date",
+    "class": _vm.clazz
+  }, [_c("label", {
+    "class": {
+      "is-error": !_vm.isValidate
+    },
+    attrs: {
+      slot: "left"
+    },
+    slot: "left"
+  }, [_vm._v(_vm._s(_vm.title)), _vm.required ? _c("span", {
+    staticClass: "list-required"
+  }, [_vm._v("*")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "list-item-content",
+    "class": [!_vm.date ? "placeholder" : "", _vm.textAlign],
+    attrs: {
+      slot: "content"
+    },
+    on: {
+      click: _vm.onClickPlaceholder
+    },
+    slot: "content"
+  }, [_vm._v("\n        " + _vm._s(_vm.dateStr || _vm.placeholder) + "\n    ")]), _vm._v(" "), _vm.rightArrow ? _c("div", {
+    staticClass: "compact-date__arrows",
+    attrs: {
+      slot: "right"
+    },
+    slot: "right"
+  }, [_c("svg", {
+    staticClass: "icon",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_c("use", {
+    attrs: {
+      "xlink:href": "#iconxiangyou"
+    }
+  })])]) : _vm._e(), _vm._v(" "), _c("van-popup", {
+    attrs: {
+      slot: "extra",
+      position: "bottom"
+    },
+    slot: "extra",
+    model: {
+      value: _vm.visible,
+      callback: function callback($$v) {
+        _vm.visible = $$v;
+      },
+      expression: "visible"
+    }
+  }, [_c("van-datetime-picker", {
+    attrs: {
+      type: _vm.type,
+      "min-date": _vm.minDate,
+      "max-date": _vm.maxDate,
+      formatter: _vm.formatter
+    },
+    on: {
+      confirm: _vm.confirm,
+      cancel: _vm.cancel
+    },
+    model: {
+      value: _vm.date,
+      callback: function callback($$v) {
+        _vm.date = $$v;
+      },
+      expression: "date"
+    }
+  })], 1)], 1);
+};
+
+var __vue_staticRenderFns__$3 = [];
+__vue_render__$3._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-ddb9cd34_0", {
+    source: ".compact-date .is-error {\n  color: #fc4548;\n}\n.compact-date .icon {\n  width: 1.5em;\n  height: 1.5em;\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["date.vue"],
+      "names": [],
+      "mappings": "AAAA;EACE,cAAc;AAChB;AACA;EACE,YAAY;EACZ,aAAa;AACf",
+      "file": "date.vue",
+      "sourcesContent": [".compact-date .is-error {\n  color: #fc4548;\n}\n.compact-date .icon {\n  width: 1.5em;\n  height: 1.5em;\n}\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$3 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$3 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$3 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$3 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$3,
+  staticRenderFns: __vue_staticRenderFns__$3
+}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, createInjector, undefined, undefined);
+
+var script$4 = {
   name: 'CompactInput',
   components: {
     ListItem: __vue_component__$1
@@ -2031,10 +2333,10 @@ var script$3 = {
 };
 /* script */
 
-var __vue_script__$3 = script$3;
+var __vue_script__$4 = script$4;
 /* template */
 
-var __vue_render__$3 = function __vue_render__() {
+var __vue_render__$4 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2115,11 +2417,11 @@ var __vue_render__$3 = function __vue_render__() {
   }) : _vm._e()])]);
 };
 
-var __vue_staticRenderFns__$3 = [];
-__vue_render__$3._withStripped = true;
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$4 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-07755ba4_0", {
     source: ".compact-input .is-error {\n  color: #fc4548;\n}\n",
@@ -2137,23 +2439,23 @@ var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$3 = undefined;
+var __vue_scope_id__$4 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$3 = undefined;
+var __vue_module_identifier__$4 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$3 = false;
+var __vue_is_functional_template__$4 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$3 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$3,
-  staticRenderFns: __vue_staticRenderFns__$3
-}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, createInjector, undefined, undefined);
+var __vue_component__$4 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$4,
+  staticRenderFns: __vue_staticRenderFns__$4
+}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, createInjector, undefined, undefined);
 
-var script$4 = {
+var script$5 = {
   name: 'CompactSelect',
   components: {
     ListItem: __vue_component__$1
@@ -2217,10 +2519,10 @@ var script$4 = {
     this.v = this.value;
   }
 };
-var __vue_script__$4 = script$4;
+var __vue_script__$5 = script$5;
 /* template */
 
-var __vue_render__$4 = function __vue_render__() {
+var __vue_render__$5 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2285,11 +2587,11 @@ var __vue_render__$4 = function __vue_render__() {
   })], 2)])]);
 };
 
-var __vue_staticRenderFns__$4 = [];
-__vue_render__$4._withStripped = true;
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$4 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-f68cd610_0", {
     source: ".compact-select .is-error {\n  color: #fc4548;\n}\n",
@@ -2307,21 +2609,21 @@ var __vue_inject_styles__$4 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$4 = undefined;
+var __vue_scope_id__$5 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$4 = undefined;
+var __vue_module_identifier__$5 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$4 = false;
+var __vue_is_functional_template__$5 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$4 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$4,
-  staticRenderFns: __vue_staticRenderFns__$4
-}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, createInjector, undefined, undefined);
+var __vue_component__$5 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$5,
+  staticRenderFns: __vue_staticRenderFns__$5
+}, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, createInjector, undefined, undefined);
 /**
  * 班级头像上传逻辑
  *
@@ -2330,7 +2632,7 @@ var __vue_component__$4 = /*#__PURE__*/normalizeComponent({
  */
 
 
-var script$5 = {
+var script$6 = {
   name: 'Uploader',
   props: {
     /** 提示内容 */
@@ -2442,10 +2744,10 @@ var script$5 = {
 };
 /* script */
 
-var __vue_script__$5 = script$5;
+var __vue_script__$6 = script$6;
 /* template */
 
-var __vue_render__$5 = function __vue_render__() {
+var __vue_render__$6 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2492,11 +2794,11 @@ var __vue_render__$5 = function __vue_render__() {
   })])]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.hint))])])], 1);
 };
 
-var __vue_staticRenderFns__$5 = [];
-__vue_render__$5._withStripped = true;
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-3e032bc2_0", {
     source: ".compact-component-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.compact-component-uploader .uploader-mock-background {\n  color: #000;\n  text-align: center;\n  margin-top: 30px;\n}\n.compact-component-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.compact-component-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.compact-component-uploader .icon {\n  font-size: 23px;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.compact-component-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.compact-component-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.compact-component-uploader .uploader-mock-background {\n  position: absolute;\n  top: 0;\n  width: 84px;\n  height: 84px;\n  text-align: center;\n}\n",
@@ -2514,27 +2816,27 @@ var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$5 = undefined;
+var __vue_scope_id__$6 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$5 = undefined;
+var __vue_module_identifier__$6 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$5 = false;
+var __vue_is_functional_template__$6 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$5 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$5,
-  staticRenderFns: __vue_staticRenderFns__$5
-}, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, createInjector, undefined, undefined);
+var __vue_component__$6 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$6,
+  staticRenderFns: __vue_staticRenderFns__$6
+}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
 
-var script$6 = {
+var script$7 = {
   name: 'CompactUploader',
   components: {
     ListItem: __vue_component__$1,
-    Uploader: __vue_component__$5
+    Uploader: __vue_component__$6
   },
   props: {
     value: {},
@@ -2697,10 +2999,10 @@ var script$6 = {
 };
 /* script */
 
-var __vue_script__$6 = script$6;
+var __vue_script__$7 = script$7;
 /* template */
 
-var __vue_render__$6 = function __vue_render__() {
+var __vue_render__$7 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2741,11 +3043,11 @@ var __vue_render__$6 = function __vue_render__() {
   })], 1);
 };
 
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-53409789_0", {
     source: ".compact-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.compact-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.compact-uploader .is-error {\n  color: #fc4548;\n}\n.compact-uploader__title {\n  padding-top: 25px;\n}\n.compact-uploader__title-hint {\n  padding-top: 4px;\n  font-size: 14px;\n  line-height: 17px;\n  color: #888888;\n}\n",
@@ -2763,23 +3065,23 @@ var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$6 = undefined;
+var __vue_scope_id__$7 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$6 = undefined;
+var __vue_module_identifier__$7 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$6 = false;
+var __vue_is_functional_template__$7 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$6 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$6,
-  staticRenderFns: __vue_staticRenderFns__$6
-}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
+var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$7,
+  staticRenderFns: __vue_staticRenderFns__$7
+}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
 
-var script$7 = {
+var script$8 = {
   name: 'CompactTextarea',
   props: {
     /** 标题 */
@@ -2825,10 +3127,10 @@ var script$7 = {
 };
 /* script */
 
-var __vue_script__$7 = script$7;
+var __vue_script__$8 = script$8;
 /* template */
 
-var __vue_render__$7 = function __vue_render__() {
+var __vue_render__$8 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2870,21 +3172,21 @@ var __vue_render__$7 = function __vue_render__() {
   })])]);
 };
 
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-3dd1524f_0", {
-    source: ".compact-textarea__title {\n  padding: 10px 15px 0;\n}\n.compact-textarea__content {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n}\n.compact-textarea__textarea {\n  width: 100%;\n  border-radius: 4px;\n  resize: none;\n}\n.compact-textarea__textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n",
+  inject("data-v-e0fab45e_0", {
+    source: ".compact-textarea__title {\n  padding: 10px 15px 0;\n}\n.compact-textarea__content {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 20px;\n}\n.compact-textarea__textarea {\n  width: 100%;\n  border-radius: 4px;\n  resize: none;\n}\n.compact-textarea__textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,
       "sources": ["textarea.vue"],
       "names": [],
       "mappings": "AAAA;EACE,oBAAoB;AACtB;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,kBAAkB;EAClB,YAAY;AACd;AACA;EACE,cAAc;AAChB",
       "file": "textarea.vue",
-      "sourcesContent": [".compact-textarea__title {\n  padding: 10px 15px 0;\n}\n.compact-textarea__content {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n}\n.compact-textarea__textarea {\n  width: 100%;\n  border-radius: 4px;\n  resize: none;\n}\n.compact-textarea__textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n"]
+      "sourcesContent": [".compact-textarea__title {\n  padding: 10px 15px 0;\n}\n.compact-textarea__content {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 20px;\n}\n.compact-textarea__textarea {\n  width: 100%;\n  border-radius: 4px;\n  resize: none;\n}\n.compact-textarea__textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n"]
     },
     media: undefined
   });
@@ -2892,25 +3194,29 @@ var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$7 = undefined;
+var __vue_scope_id__$8 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$7 = undefined;
+var __vue_module_identifier__$8 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$7 = false;
+var __vue_is_functional_template__$8 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$7,
-  staticRenderFns: __vue_staticRenderFns__$7
-}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
+var __vue_component__$8 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$8,
+  staticRenderFns: __vue_staticRenderFns__$8
+}, __vue_inject_styles__$8, __vue_script__$8, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, createInjector, undefined, undefined);
 
 exports.CompactCascader = __vue_component__$2;
-exports.CompactInput = __vue_component__$3;
-exports.CompactSelect = __vue_component__$4;
-exports.CompactTextarea = __vue_component__$7;
-exports.CompactUploader = __vue_component__$6;
+exports.CompactDate = __vue_component__$3;
+exports.CompactInput = __vue_component__$4;
+exports.CompactSelect = __vue_component__$5;
+exports.CompactTextarea = __vue_component__$8;
+exports.CompactUploader = __vue_component__$7;
 exports.ListItem = __vue_component__$1;
+exports.Placeholder = Placeholder;
+exports.Title = Title;
+exports.Validate = Validate;

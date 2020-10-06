@@ -1,5 +1,7 @@
 import './lib/font.js';
+export * from './lib/mixins';
 export { default as CompactCascader } from './js/sections/cascader.vue';
+export { default as CompactDate } from './js/sections/date.vue';
 export { default as CompactInput } from './js/sections/input.vue';
 export { default as CompactSelect } from './js/sections/select.vue';
 export { default as CompactUploader } from './js/sections/uploader.vue';

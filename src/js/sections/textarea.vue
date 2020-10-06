@@ -72,8 +72,8 @@ export default {
     }
     &__content {
         padding: 10px 15px;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 20px;
     }
     &__textarea {
         width: 100%;

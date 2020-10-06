@@ -25,7 +25,7 @@
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import {
     isUndef,
-} from '../utils';
+} from '../../lib/utils';
 import { CascaderItem } from 'types/form';
 
 /**

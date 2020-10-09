@@ -1,6 +1,6 @@
 <template>
     <ListItem class="compact-select" :class="clazz">
-        <label slot="left" :class="{'is-error': !isValiate}">{{title}}<span v-if="required" class="list-required">*</span></label>
+        <label v-if="title" slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
             <select v-model="v" class="list-input right block" type="text" :class="{placeholder: v === ''}" >
                 <option value="">{{placeholder}}</option>
@@ -33,7 +33,7 @@ export default class CompactSelect extends Vue {
     /** 占位 */
     @Prop({ type: String, default: '点击选择'}) public placeholder!: any;
     /** 是否通过验证 */
-    @Prop({ type: Boolean, default: true }) public isValiate?: boolean;
+    @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
     /** class */
     @Prop() public clazz?: any;
 

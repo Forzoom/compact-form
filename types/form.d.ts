@@ -1,3 +1,5 @@
+import { FormSection } from '@forzoom/form-renderer/types/form';
+
 export interface TitleMixin {
     title?: string;
     required?: boolean;
@@ -10,24 +12,8 @@ export interface PlaceholderMixin {
     placeholder?: string;
 }
 
-export interface ValidateRule {
-    required?: boolean;
-    pattern?: RegExp;
-    trigger?: 'blur' | 'validate';
-    /** 最大长度 */
-    max?: number;
-    min?: number;
-    message?: string;
-}
-
-export interface CompactFormBasicSectionMeta {
-    type: string;
-    key: string;
-    validates?: ValidateRule[];
-}
-
 // cascader
-export interface CompactCascaderMeta extends CompactFormBasicSectionMeta {
+export interface CompactCascaderMeta extends FormSection {
     type: 'CompactCascader';
     props: TitleMixin & PlaceholderMixin & {
         /** 获取列表数据 */
@@ -40,7 +26,7 @@ export interface CompactCascaderMeta extends CompactFormBasicSectionMeta {
 }
 
 // date
-export interface CompactDateMeta extends CompactFormBasicSectionMeta {
+export interface CompactDateMeta extends FormSection {
     type: 'CompactDate';
     props: TitleMixin & PlaceholderMixin & {
         /** class */
@@ -55,7 +41,7 @@ export interface CompactDateMeta extends CompactFormBasicSectionMeta {
 }
 
 // input
-export interface CompactInputMeta extends CompactFormBasicSectionMeta {
+export interface CompactInputMeta extends FormSection {
     type: 'CompactInput';
     props?: {
         title?: string;
@@ -71,7 +57,7 @@ export interface CompactInputMeta extends CompactFormBasicSectionMeta {
 }
 
 // select
-export interface CompactSelectMeta extends CompactFormBasicSectionMeta {
+export interface CompactSelectMeta extends FormSection {
     type: 'CompactSelect';
     props?: {
         title?: string;
@@ -86,7 +72,7 @@ export interface CompactSelectMeta extends CompactFormBasicSectionMeta {
 }
 
 // textarea
-export interface CompactTextareaMeta extends CompactFormBasicSectionMeta {
+export interface CompactTextareaMeta extends FormSection {
     type: 'CompactTextarea';
     props?: {
         /** 标题 */
@@ -99,7 +85,7 @@ export interface CompactTextareaMeta extends CompactFormBasicSectionMeta {
 }
 
 // uploader
-export interface CompactUploaderMeta extends CompactFormBasicSectionMeta {
+export interface CompactUploaderMeta extends FormSection {
     type: 'CompactUploader';
     props?: {
         /** 标题 */

@@ -1,6 +1,6 @@
 {
   "name": "@forzoom/compact-form",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "main": "dist/compact-form.cjs.js",
   "module": "dist/compact-form.esm.js",
   "license": "MIT",
@@ -30,5 +30,7 @@
     "vue-property-decorator": "^9.0.0",
     "vue-template-compiler": "^2.6.12"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@forzoom/form-renderer": "^0.1.0"
+  }
 }

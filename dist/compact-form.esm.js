@@ -2441,7 +2441,7 @@ var script$5 = {
     },
 
     /** 是否通过验证 */
-    isValiate: {
+    isValidate: {
       type: Boolean,
       "default": true
     },
@@ -2484,9 +2484,9 @@ var __vue_render__$5 = function __vue_render__() {
   return _c("ListItem", {
     staticClass: "compact-select",
     "class": _vm.clazz
-  }, [_c("label", {
+  }, [_vm.title ? _c("label", {
     "class": {
-      "is-error": !_vm.isValiate
+      "is-error": !_vm.isValidate
     },
     attrs: {
       slot: "left"
@@ -2494,7 +2494,7 @@ var __vue_render__$5 = function __vue_render__() {
     slot: "left"
   }, [_vm._v(_vm._s(_vm.title)), _vm.required ? _c("span", {
     staticClass: "list-required"
-  }, [_vm._v("*")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("*")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "list-item-content",
     attrs: {
       slot: "content"
@@ -2545,7 +2545,7 @@ __vue_render__$5._withStripped = true;
 
 var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-f68cd610_0", {
+  inject("data-v-d30deab6_0", {
     source: ".compact-select .is-error {\n  color: #fc4548;\n}\n",
     map: {
       "version": 3,

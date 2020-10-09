@@ -884,6 +884,11 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@forzoom/form-renderer@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@forzoom/form-renderer/-/form-renderer-0.1.0.tgz#d26ad7151d0812b2d178e8203a6c2e580843e7e5"
+  integrity sha512-3phoQx2JN47iQGQFiUcivVOpaQ4VN3X4gyC0xhNntknUpDxoKBZOLUSPkcfK2Yev3ww7fsD7UnLVECQRU6BYew==
+
 "@forzoom/uploader@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@forzoom/uploader/-/uploader-0.2.1.tgz#9392ac437283c786a09647dbbb110d32430c829b"

@@ -1,7 +1,7 @@
 <template>
 
     <ListItem class="compact-select" :class="clazz">
-        <label slot="left" :class="{'is-error': !isValiate}">{{title}}<span v-if="required" class="list-required">*</span></label>
+        <label v-if="title" slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
             <select v-model="v" class="list-input right block" type="text" :class="{placeholder: v === ''}" >
                 <option value="">{{placeholder}}</option>
@@ -38,7 +38,7 @@ export default {
         placeholder: { type: String, default: '点击选择'},
 
         /** 是否通过验证 */
-        isValiate: { type: Boolean, default: true },
+        isValidate: { type: Boolean, default: true },
 
         /** class */
         clazz: {},

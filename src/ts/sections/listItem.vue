@@ -32,8 +32,8 @@ export default class ListItem extends Vue {
 <style lang="less">
 @import "../../lib/style/mixins.less";
 
-@list-font-size: 16px;
-@list-line-height: 24px;
+@list-font-size: 14px;
+@list-line-height: 20px;
 @list-padding-v: 12px;
 @list-padding-h: 15px;
 
@@ -84,8 +84,8 @@ export default class ListItem extends Vue {
 
     // 应用在input上
     .list-input {
-        font-size: 16px;
-        line-height: 22px;
+        font-size: @list-font-size;
+        line-height: @list-line-height;
         background-color: transparent;
         border: 0;
         // 删除原本样式
@@ -130,8 +130,8 @@ export default class ListItem extends Vue {
     // textarea的样式
     .list-item-textarea {
         width: 100%;
-        font-size: 16px;
-        line-height: 22px;
+        font-size: @list-font-size;
+        line-height: @list-line-height;
         border: 0;
         vertical-align: middle;
         resize: none;

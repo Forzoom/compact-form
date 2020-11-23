@@ -1,6 +1,6 @@
 {
   "name": "@forzoom/compact-form",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/compact-form.cjs.js",
   "module": "dist/compact-form.esm.js",
   "license": "MIT",

@@ -81,6 +81,24 @@ export type CompactSelectComponentOptions = ComponentOptions<Vue, object, object
 
 export const CompactSelect: CompactSelectComponentOptions;
 
+// switch
+interface CompactSwitchProp {
+    title?: string;
+    /** 是否显示星号 */
+    required?: boolean;
+    /** class */
+    clazz?: string[];
+    /** 对于switch的配置 */
+    activeColor?: string;
+    inactiveColor?: string;
+    activeValue?: any;
+    inactiveValue?: any;
+}
+export type CompactSwitchComponent = CombinedVueInstance<Vue, object, object, object, CompactSwitchProp>;
+export type CompactSwitchComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<CompactSwitchProp>, CompactSwitchProp>;
+
+export const CompactSwitch: CompactSwitchComponentOptions;
+
 // textarea
 interface CompactTextareaProp {
     /** 标题 */

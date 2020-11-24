@@ -4,6 +4,7 @@ export { default as CompactCascader } from './js/sections/cascader.vue';
 export { default as CompactDate } from './js/sections/date.vue';
 export { default as CompactInput } from './js/sections/input.vue';
 export { default as CompactSelect } from './js/sections/select.vue';
+export { default as CompactSwitch } from './js/sections/switch.vue';
 export { default as CompactUploader } from './js/sections/uploader.vue';
 export { default as CompactTextarea } from './js/sections/textarea.vue';
 export { default as ListItem } from './js/sections/listItem.vue';

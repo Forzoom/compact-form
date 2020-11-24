@@ -71,6 +71,23 @@ export interface CompactSelectMeta extends FormSection {
     };
 }
 
+// switch
+export interface CompactSwitchMeta extends FormSection {
+    type: 'CompactSwitch';
+    props?: {
+        title?: string;
+        /** 是否显示星号 */
+        required?: boolean;
+        /** class */
+        clazz?: string[];
+        /** 对于switch的配置 */
+        activeColor?: string;
+        inactiveColor?: string;
+        activeValue?: any;
+        inactiveValue?: any;
+    };
+}
+
 // textarea
 export interface CompactTextareaMeta extends FormSection {
     type: 'CompactTextarea';
@@ -101,7 +118,7 @@ export interface CompactUploaderMeta extends FormSection {
     };
 }
 
-export type CompactFormSectionMeta = CompactCascaderMeta | CompactDateMeta | CompactInputMeta | CompactSelectMeta | CompactTextareaMeta | CompactUploaderMeta;
+export type CompactFormSectionMeta = CompactCascaderMeta | CompactDateMeta | CompactInputMeta | CompactSelectMeta | CompactSwitchMeta | CompactTextareaMeta | CompactUploaderMeta;
 
 export interface ValueText {
     value: any;

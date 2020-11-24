@@ -2576,6 +2576,159 @@ var __vue_component__$5 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$5,
   staticRenderFns: __vue_staticRenderFns__$5
 }, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, createInjector, undefined, undefined);
+
+var script$6 = {
+  name: 'CompactSwitch',
+  components: {
+    ListItem: __vue_component__$1
+  },
+  props: {
+    /** 标题 */
+    title: {
+      type: String
+    },
+
+    /** 是否必填 */
+    required: {
+      type: Boolean,
+      "default": false
+    },
+
+    /** 数据 */
+    value: {},
+
+    /** 是否通过验证 */
+    isValidate: {
+      type: Boolean,
+      "default": true
+    },
+
+    /** class */
+    clazz: {},
+
+    /** active颜色 */
+    activeColor: {
+      type: String
+    },
+
+    /** inactive颜色 */
+    inactiveColor: {
+      type: String
+    },
+
+    /** active值 */
+    activeValue: {},
+
+    /** inactive值 */
+    inactiveValue: {}
+  },
+  data: function data() {
+    return {
+      // 值
+      v: null
+    };
+  },
+  computed: {},
+  watch: {
+    '$props.value': function $propsValue(val) {
+      this.v = val;
+    },
+    v: function v(val) {
+      this.$emit('input', val);
+    }
+  },
+  methods: {},
+  created: function created() {
+    this.v = this.value;
+  }
+};
+/* script */
+
+var __vue_script__$6 = script$6;
+/* template */
+
+var __vue_render__$6 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("ListItem", {
+    staticClass: "compact-switch",
+    "class": _vm.clazz
+  }, [_vm.title ? _c("label", {
+    "class": {
+      "is-error": !_vm.isValidate
+    },
+    attrs: {
+      slot: "left"
+    },
+    slot: "left"
+  }, [_vm._v(_vm._s(_vm.title)), _vm.required ? _c("span", {
+    staticClass: "list-required"
+  }, [_vm._v("*")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "list-item-content",
+    attrs: {
+      slot: "content"
+    },
+    slot: "content"
+  }, [_c("van-switch", {
+    staticClass: "compact-switch__switch",
+    attrs: {
+      size: "18px",
+      "active-color": _vm.activeColor,
+      "inactive-color": _vm.inactiveColor,
+      "active-value": _vm.activeValue,
+      "inactive-value": _vm.inactiveValue
+    },
+    model: {
+      value: _vm.v,
+      callback: function callback($$v) {
+        _vm.v = $$v;
+      },
+      expression: "v"
+    }
+  })], 1)]);
+};
+
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-0374100d_0", {
+    source: ".compact-switch .is-error {\n  color: #fc4548;\n}\n.compact-switch .list-item-content {\n  position: relative;\n  height: 20px;\n}\n.compact-switch__switch {\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["switch.vue"],
+      "names": [],
+      "mappings": "AAAA;EACE,cAAc;AAChB;AACA;EACE,kBAAkB;EAClB,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,MAAM;AACR",
+      "file": "switch.vue",
+      "sourcesContent": [".compact-switch .is-error {\n  color: #fc4548;\n}\n.compact-switch .list-item-content {\n  position: relative;\n  height: 20px;\n}\n.compact-switch__switch {\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$6 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$6 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$6 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$6 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$6,
+  staticRenderFns: __vue_staticRenderFns__$6
+}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
 /**
  * 班级头像上传逻辑
  *
@@ -2584,7 +2737,7 @@ var __vue_component__$5 = /*#__PURE__*/normalizeComponent({
  */
 
 
-var script$6 = {
+var script$7 = {
   name: 'Uploader',
   props: {
     /** 提示内容 */
@@ -2696,10 +2849,10 @@ var script$6 = {
 };
 /* script */
 
-var __vue_script__$6 = script$6;
+var __vue_script__$7 = script$7;
 /* template */
 
-var __vue_render__$6 = function __vue_render__() {
+var __vue_render__$7 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2746,11 +2899,11 @@ var __vue_render__$6 = function __vue_render__() {
   })])]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.hint))])])], 1);
 };
 
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-3e032bc2_0", {
     source: ".compact-component-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.compact-component-uploader .uploader-mock-background {\n  color: #000;\n  text-align: center;\n  margin-top: 30px;\n}\n.compact-component-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.compact-component-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.compact-component-uploader .icon {\n  font-size: 23px;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.compact-component-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.compact-component-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.compact-component-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.compact-component-uploader .uploader-mock-background {\n  position: absolute;\n  top: 0;\n  width: 84px;\n  height: 84px;\n  text-align: center;\n}\n",
@@ -2768,27 +2921,27 @@ var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$6 = undefined;
+var __vue_scope_id__$7 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$6 = undefined;
+var __vue_module_identifier__$7 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$6 = false;
+var __vue_is_functional_template__$7 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$6 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$6,
-  staticRenderFns: __vue_staticRenderFns__$6
-}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
+var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$7,
+  staticRenderFns: __vue_staticRenderFns__$7
+}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
 
-var script$7 = {
+var script$8 = {
   name: 'CompactUploader',
   components: {
     ListItem: __vue_component__$1,
-    Uploader: __vue_component__$6
+    Uploader: __vue_component__$7
   },
   props: {
     value: {},
@@ -2951,10 +3104,10 @@ var script$7 = {
 };
 /* script */
 
-var __vue_script__$7 = script$7;
+var __vue_script__$8 = script$8;
 /* template */
 
-var __vue_render__$7 = function __vue_render__() {
+var __vue_render__$8 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2995,11 +3148,11 @@ var __vue_render__$7 = function __vue_render__() {
   })], 1);
 };
 
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-53409789_0", {
     source: ".compact-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.compact-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.compact-uploader .is-error {\n  color: #fc4548;\n}\n.compact-uploader__title {\n  padding-top: 25px;\n}\n.compact-uploader__title-hint {\n  padding-top: 4px;\n  font-size: 14px;\n  line-height: 17px;\n  color: #888888;\n}\n",
@@ -3017,23 +3170,23 @@ var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$7 = undefined;
+var __vue_scope_id__$8 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$7 = undefined;
+var __vue_module_identifier__$8 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$7 = false;
+var __vue_is_functional_template__$8 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$7,
-  staticRenderFns: __vue_staticRenderFns__$7
-}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
+var __vue_component__$8 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$8,
+  staticRenderFns: __vue_staticRenderFns__$8
+}, __vue_inject_styles__$8, __vue_script__$8, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, createInjector, undefined, undefined);
 
-var script$8 = {
+var script$9 = {
   name: 'CompactTextarea',
   props: {
     /** 标题 */
@@ -3079,10 +3232,10 @@ var script$8 = {
 };
 /* script */
 
-var __vue_script__$8 = script$8;
+var __vue_script__$9 = script$9;
 /* template */
 
-var __vue_render__$8 = function __vue_render__() {
+var __vue_render__$9 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -3124,11 +3277,11 @@ var __vue_render__$8 = function __vue_render__() {
   })])]);
 };
 
-var __vue_staticRenderFns__$8 = [];
-__vue_render__$8._withStripped = true;
+var __vue_staticRenderFns__$9 = [];
+__vue_render__$9._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$9 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-e0fab45e_0", {
     source: ".compact-textarea__title {\n  padding: 10px 15px 0;\n}\n.compact-textarea__content {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 20px;\n}\n.compact-textarea__textarea {\n  width: 100%;\n  border-radius: 4px;\n  resize: none;\n}\n.compact-textarea__textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n",
@@ -3146,20 +3299,20 @@ var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$8 = undefined;
+var __vue_scope_id__$9 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$8 = undefined;
+var __vue_module_identifier__$9 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$8 = false;
+var __vue_is_functional_template__$9 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$8 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$8,
-  staticRenderFns: __vue_staticRenderFns__$8
-}, __vue_inject_styles__$8, __vue_script__$8, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, createInjector, undefined, undefined);
+var __vue_component__$9 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$9,
+  staticRenderFns: __vue_staticRenderFns__$9
+}, __vue_inject_styles__$9, __vue_script__$9, __vue_scope_id__$9, __vue_is_functional_template__$9, __vue_module_identifier__$9, false, createInjector, undefined, undefined);
 
-export { __vue_component__$2 as CompactCascader, __vue_component__$3 as CompactDate, __vue_component__$4 as CompactInput, __vue_component__$5 as CompactSelect, __vue_component__$8 as CompactTextarea, __vue_component__$7 as CompactUploader, __vue_component__$1 as ListItem, Placeholder, Title, Validate };
+export { __vue_component__$2 as CompactCascader, __vue_component__$3 as CompactDate, __vue_component__$4 as CompactInput, __vue_component__$5 as CompactSelect, __vue_component__$6 as CompactSwitch, __vue_component__$9 as CompactTextarea, __vue_component__$8 as CompactUploader, __vue_component__$1 as ListItem, Placeholder, Title, Validate };

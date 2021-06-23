@@ -6,6 +6,7 @@
                 :key="index"
                 class="cascader__crumb"
                 :class="{selected: level == index}"
+                :style="{color: level === index ? color : ''}"
                 @click="onClickCrumb(index)">
                 {{name}}
             </div>
@@ -43,6 +44,9 @@ export default {
 
         /** 获取列表数据 */
         fetchList: { required: true, type: Function },
+
+        /** 颜色 */
+        color: { type: String },
     },
 
     data: function data() {

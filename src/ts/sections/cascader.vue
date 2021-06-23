@@ -47,6 +47,10 @@ export default class CompactCascader extends Vue {
     @Prop({ type: String, default: 'right' }) public textAlign!: string;
     /** 是否显示右边箭头 */
     @Prop({ type: Boolean, default: false }) public rightArrow?: boolean;
+    /** 是否禁用 */
+    @Prop({ type: Boolean, default: false }) public disabled!: boolean;
+    /** 颜色 */
+    @Prop({ type: String }) public color?: string;
 
     public visible = false;
     public ids: number[] = [];
@@ -69,6 +73,9 @@ export default class CompactCascader extends Vue {
     }
 
     public onClickPlaceholder() {
+        if (this.disabled) {
+            return;
+        }
         this.visible = true;
     }
 

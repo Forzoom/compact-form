@@ -3,8 +3,8 @@
     <ListItem class="compact-input" :class="clazz">
         <label v-if="title" slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
-            <input v-if="type == 'text'" v-model="v" class="list-input block" :class="[textAlign]" type="text" :placeholder="placeholder" @blur="onBlur" />
-            <input v-if="type == 'tel'" v-model="v" class="list-input block" :class="[textAlign]" type="tel" :placeholder="placeholder" @blur="onBlur" />
+            <input v-if="type == 'text'" v-model="v" class="list-input block" :class="[textAlign]" :disabled="disabled" type="text" :placeholder="placeholder" @blur="onBlur" />
+            <input v-if="type == 'tel'" v-model="v" class="list-input block" :class="[textAlign]" :disabled="disabled" type="tel" :placeholder="placeholder" @blur="onBlur" />
         </div>
     </ListItem>
 
@@ -43,6 +43,9 @@ export default {
 
         /** class */
         clazz: {},
+
+        /** 是否禁用 */
+        disabled: { type: Boolean, default: false },
     },
 
     data: function data() {
@@ -75,8 +78,8 @@ export default {
     },
 };
 </script>
-
 <style lang="less">
+
 @import "../../lib/style/mixins.less";
 
 .compact-input {
@@ -84,4 +87,5 @@ export default {
         color: @color-red;
     }
 }
+
 </style>

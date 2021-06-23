@@ -2,7 +2,7 @@
     <ListItem class="compact-select" :class="clazz">
         <label v-if="title" slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
-            <select v-model="v" class="list-input right block" type="text" :class="{placeholder: v === ''}" >
+            <select v-model="v" class="list-input right block" type="text" :disabled="disabled" :class="{placeholder: v === ''}" >
                 <option value="">{{placeholder}}</option>
                 <option v-for="(option, index) in options" :key="index" :value="option.value">{{option.text}}</option>
             </select>
@@ -36,6 +36,8 @@ export default class CompactSelect extends Vue {
     @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
     /** class */
     @Prop() public clazz?: any;
+    /** 是否禁用 */
+    @Prop({ type: Boolean, default: false }) public disabled!: boolean;
 
     // 值
     public v: any = null;

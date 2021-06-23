@@ -22,6 +22,8 @@ export interface CompactCascaderMeta extends FormSection {
         clazz?: string[];
         /** 是否显示右边的箭头 */
         rightArrow?: boolean;
+        /** 是否禁用 */
+        disabled?: boolean;
     };
 }
 
@@ -53,6 +55,10 @@ export interface CompactInputMeta extends FormSection {
         textAlign?: 'left' | 'center' | 'right';
         /** class */
         clazz?: string[];
+        /** 是否禁用 */
+        disabled?: boolean;
+        /** 颜色 */
+        color?: string;
     };
 }
 
@@ -68,6 +74,8 @@ export interface CompactSelectMeta extends FormSection {
         options?: ValueText[];
         /** class */
         clazz?: string[];
+        /** 是否禁用 */
+        disabled?: boolean;
     };
 }
 

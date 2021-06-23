@@ -1869,6 +1869,12 @@ var script$2 = {
     rightArrow: {
       type: Boolean,
       "default": false
+    },
+
+    /** 是否禁用 */
+    disabled: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
@@ -1901,6 +1907,10 @@ var script$2 = {
       this.itemMap = itemMap;
     },
     onClickPlaceholder: function onClickPlaceholder() {
+      if (this.disabled) {
+        return;
+      }
+
       this.visible = true;
     },
     onFinish: function onFinish() {
@@ -2041,7 +2051,7 @@ __vue_render__$2._withStripped = true;
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-1d049d2b_0", {
+  inject("data-v-01de3cec_0", {
     source: ".compact-cascader .is-error {\n  color: #fc4548;\n}\n.compact-cascader .icon {\n  width: 1.5em;\n  height: 1.5em;\n}\n.compact-cascader .placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,
@@ -2305,7 +2315,13 @@ var script$4 = {
     },
 
     /** class */
-    clazz: {}
+    clazz: {},
+
+    /** 是否禁用 */
+    disabled: {
+      type: Boolean,
+      "default": false
+    }
   },
   data: function data() {
     return {
@@ -2372,6 +2388,7 @@ var __vue_render__$4 = function __vue_render__() {
     staticClass: "list-input block",
     "class": [_vm.textAlign],
     attrs: {
+      disabled: _vm.disabled,
       type: "text",
       placeholder: _vm.placeholder
     },
@@ -2398,6 +2415,7 @@ var __vue_render__$4 = function __vue_render__() {
     staticClass: "list-input block",
     "class": [_vm.textAlign],
     attrs: {
+      disabled: _vm.disabled,
       type: "tel",
       placeholder: _vm.placeholder
     },
@@ -2423,7 +2441,7 @@ __vue_render__$4._withStripped = true;
 
 var __vue_inject_styles__$4 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-07755ba4_0", {
+  inject("data-v-1527e2ca_0", {
     source: ".compact-input .is-error {\n  color: #fc4548;\n}\n",
     map: {
       "version": 3,
@@ -2495,7 +2513,13 @@ var script$5 = {
     },
 
     /** class */
-    clazz: {}
+    clazz: {},
+
+    /** 是否禁用 */
+    disabled: {
+      type: Boolean,
+      "default": false
+    }
   },
   data: function data() {
     return {
@@ -2560,7 +2584,8 @@ var __vue_render__$5 = function __vue_render__() {
       placeholder: _vm.v === ""
     },
     attrs: {
-      type: "text"
+      type: "text",
+      disabled: _vm.disabled
     },
     on: {
       change: function change($event) {
@@ -2593,7 +2618,7 @@ __vue_render__$5._withStripped = true;
 
 var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-d30deab6_0", {
+  inject("data-v-c8aad450_0", {
     source: ".compact-select .is-error {\n  color: #fc4548;\n}\n",
     map: {
       "version": 3,

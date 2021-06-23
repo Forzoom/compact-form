@@ -2,8 +2,8 @@
     <ListItem class="compact-input" :class="clazz">
         <label v-if="title" slot="left" :class="{'is-error': !isValidate}">{{title}}<span v-if="required" class="list-required">*</span></label>
         <div slot="content" class="list-item-content">
-            <input v-if="type == 'text'" v-model="v" class="list-input block" :class="[textAlign]" type="text" :placeholder="placeholder" @blur="onBlur" />
-            <input v-if="type == 'tel'" v-model="v" class="list-input block" :class="[textAlign]" type="tel" :placeholder="placeholder" @blur="onBlur" />
+            <input v-if="type == 'text'" v-model="v" class="list-input block" :class="[textAlign]" :disabled="disabled" type="text" :placeholder="placeholder" @blur="onBlur" />
+            <input v-if="type == 'tel'" v-model="v" class="list-input block" :class="[textAlign]" :disabled="disabled" type="tel" :placeholder="placeholder" @blur="onBlur" />
         </div>
     </ListItem>
 </template>
@@ -35,6 +35,8 @@ export default class CompactInput extends Vue {
     @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
     /** class */
     @Prop() public clazz?: any;
+    /** 是否禁用 */
+    @Prop({ type: Boolean, default: false }) public disabled!: boolean;
 
     // 值
     public v: any = null;

@@ -5,6 +5,7 @@
                 :key="index"
                 class="cascader__crumb"
                 :class="{selected: level == index}"
+                :style="{color: level === index ? color : ''}"
                 @click="onClickCrumb(index)">
                 {{name}}
             </div>
@@ -42,6 +43,8 @@ export default class Cascader extends Vue {
     @Prop({ type: Number, default: 3 }) public maxLevel!: number;
     /** 获取列表数据 */
     @Prop({ required: true, type: Function }) public fetchList!: (item: CascaderItem) => CascaderItem[];
+    /** 颜色 */
+    @Prop({ type: String }) public color?: string;
 
     /** 当前显示的level */
     public level = 0;

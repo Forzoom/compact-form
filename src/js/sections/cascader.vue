@@ -53,6 +53,12 @@ export default {
 
         /** 是否显示右边箭头 */
         rightArrow: { type: Boolean, default: false },
+
+        /** 是否禁用 */
+        disabled: { type: Boolean, default: false },
+
+        /** 颜色 */
+        color: { type: String },
     },
 
     data: function data() {
@@ -84,6 +90,9 @@ export default {
         },
 
         onClickPlaceholder: function() {
+            if (this.disabled) {
+                return;
+            }
             this.visible = true;
         },
 
